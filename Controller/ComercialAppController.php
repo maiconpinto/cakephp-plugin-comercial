@@ -12,4 +12,9 @@ class ComercialAppController extends AppController {
 
         return false;
     }
+
+    public function beforeFilter()
+    {
+        $this->theme = 'admin';
+    }
 }
