@@ -8,4 +8,14 @@ class ComercialController extends ComercialAppController
     {
 
     }
+
+    public function pedidos()
+    {
+        
+    }
+
+    public function pendentes()
+    {
+
+    }
 }
