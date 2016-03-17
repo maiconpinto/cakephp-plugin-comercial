@@ -1,1 +1,5 @@
-# cakephp-plugin-pedidos
+# CakePHP - Plugin Pedidos
+
+## Theme Admin
+
+* Configurado para usar [Theme Admin](https://github.com/maiconpinto/cakephp-themed-admin)
