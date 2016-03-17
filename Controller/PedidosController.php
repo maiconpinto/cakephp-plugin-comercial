@@ -14,4 +14,19 @@ class PedidosController extends ComercialAppController
             $this->Flash->error('Não foi possível cadastrar seu pedido, tente novamente.');
         }
     }
+
+    public function produtos($pedido_id = null)
+    {
+        if (empty($pedido_id)) {
+            $this->Flash->success('Pedido não informado, por favor, cadastre-o.');
+            return $this->redirect(array('action' => 'novo'));
+        }
+
+        $pedido = $this->Pedido->findById($pedido_id);
+        $this->loadModel('Produto');
+        $produtos = $this->Produto->find('all');
+
+        $this->set(compact('pedido', 'produtos'));
+
+    }
 }
