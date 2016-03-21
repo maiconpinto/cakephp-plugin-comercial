@@ -29,4 +29,40 @@ class PedidosController extends ComercialAppController
         $this->set(compact('pedido', 'produtos'));
 
     }
+
+    public function produto($produto_id = null, $pedido_id = null)
+    {
+        if (empty($produto_id)) {
+            $this->Flash->error('Produto não informado');
+            $this->redirect(array('plugin' => 'comercial', 'admin' => false, 'controller' => 'comercial', 'action' => 'index'));
+        }
+
+        if (empty($pedido_id)) {
+            $this->Flash->error('Pedido não informado');
+            $this->redirect(array('plugin' => 'comercial', 'admin' => false, 'controller' => 'comercial', 'action' => 'index'));
+        }
+
+        $this->loadModel('Comercial.Item');
+        
+        $item = $this->Item->findByPedidoIdAndProdutoId($pedido_id, $produto_id);
+
+        if (!empty($item)) {
+            $this->Item->delete($item['Item']['id']);
+            $this->Flash->success('Item retirado com sucesso, continue selecionando os produtos, depois clique em Conferir para visualizar todos produtos e Concluir o pedido.');
+            return $this->redirect(array('plugin' => 'comercial', 'admin' => false, 'controller' => 'pedidos', 'action' => 'produtos', $pedido_id));
+        }
+
+        $item = array('Item' => array(
+            'pedido_id' => $pedido_id,
+            'produto_id' => $produto_id,
+            'qtde' => '1',
+            'valor_unitario' => '0',
+            'valor_total' => '0'
+        ));
+
+        if ($this->Item->save($item)) {
+            $this->Flash->success('Continue adicionando produtos ao Pedido, depois clique em Conferir para visualizar todos produtos e Concluir o pedido.');
+            $this->redirect(array('plugin' => 'comercial', 'admin' => false, 'controller' => 'pedidos', 'action' => 'produtos', $pedido_id));
+        }
+    }
 }
