@@ -4,6 +4,8 @@ class Item extends ComercialAppModel
 {
     public $useTable = 'itens';
 
+    public $belongsTo = array('Produto');
+
     public function findByPedidoIdAndProdutoId($pedido_id = null, $produto_id = nuull)
     {
         if (empty($pedido_id) || empty($produto_id)) {

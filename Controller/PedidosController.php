@@ -2,6 +2,8 @@
 
 class PedidosController extends ComercialAppController
 {
+    private $referer = array('plugin' => 'comercial', 'admin' => false, 'controller' => 'comercial', 'action' => 'index');
+
     public function novo() 
     {
         if ($this->request->is('post')) {
@@ -29,18 +31,17 @@ class PedidosController extends ComercialAppController
         $this->loadModel('Comercial.Item');
         $itens = $this->Item->findByPedidoId($pedido_id);
         $this->set(compact('pedido', 'produtos', 'itens'));
-
     }
 
     public function produto($produto_id = null, $pedido_id = null)
     {
         if (empty($produto_id)) {
-            $this->Flash->error('Produto não informado');
+            $this->Flash->error('Produto não informado.');
             $this->redirect(array('plugin' => 'comercial', 'admin' => false, 'controller' => 'comercial', 'action' => 'index'));
         }
 
         if (empty($pedido_id)) {
-            $this->Flash->error('Pedido não informado');
+            $this->Flash->error('Pedido não informado.');
             $this->redirect(array('plugin' => 'comercial', 'admin' => false, 'controller' => 'comercial', 'action' => 'index'));
         }
 
@@ -50,8 +51,8 @@ class PedidosController extends ComercialAppController
 
         if (!empty($item)) {
             $this->Item->delete($item['Item']['id']);
-            $this->Flash->success('Item retirado com sucesso, continue selecionando os produtos, depois clique em Conferir para visualizar todos produtos e Concluir o pedido.');
-            return $this->redirect(array('plugin' => 'comercial', 'admin' => false, 'controller' => 'pedidos', 'action' => 'produtos', $pedido_id));
+            $this->Flash->success('Item retirado com sucesso.');
+            return $this->redirect($this->getReferer());
         }
 
         $item = array('Item' => array(
@@ -63,8 +64,26 @@ class PedidosController extends ComercialAppController
         ));
 
         if ($this->Item->save($item)) {
-            $this->Flash->success('Continue adicionando produtos ao Pedido, depois clique em Conferir para visualizar todos produtos e Concluir o pedido.');
-            $this->redirect(array('plugin' => 'comercial', 'admin' => false, 'controller' => 'pedidos', 'action' => 'produtos', $pedido_id));
+            $this->Flash->success('Continue adicionando produtos ao Pedido.');
         }
+        
+        return $this->redirect($this->getReferer());
+    }
+
+    public function conferir($pedido_id = null)
+    {
+        if (empty($pedido_id)) {
+            $this->Flash->error('Pedido não informado.');
+            return $this->redirect(array('plugin' => 'comercial', 'admin' => false, 'controller' => 'comercial', 'action' => 'index'));
+        }
+
+        $pedido = $this->Pedido->findById($pedido_id);
+
+        $this->loadModel('Comercial.Item');
+        $this->Item->recursive = 2;
+        $itens = $this->Item->findByPedidoId($pedido_id);
+        $this->set(compact('pedido', 'itens'));
+
+
     }
 }
