@@ -26,7 +26,9 @@ class PedidosController extends ComercialAppController
         $this->loadModel('Produto');
         $produtos = $this->Produto->find('all');
 
-        $this->set(compact('pedido', 'produtos'));
+        $this->loadModel('Comercial.Item');
+        $itens = $this->Item->findByPedidoId($pedido_id);
+        $this->set(compact('pedido', 'produtos', 'itens'));
 
     }
 
