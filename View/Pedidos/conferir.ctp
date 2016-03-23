@@ -120,8 +120,6 @@
     function atualiza_total(obj_qtde, obj_valor_unitario, obj_valor_total) {
         var valor_total = getValor(obj_qtde.val()) * getValor(obj_valor_unitario.val());
         var valor_final = setMoeda(valor_total);
-        console.info('valor_final');
-        console.info(valor_final);
         obj_valor_total.val(valor_final);
     }
 
