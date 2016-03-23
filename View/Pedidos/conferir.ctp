@@ -64,7 +64,7 @@
                                 <tfoot>
                                     <tr>
                                         <td colspan="5" align="right">
-                                            <span id="total_geral">0</span>
+                                            R$ <span id="valor_total_geral">0,00</span>
                                         </td>
                                         <td></td>
                                     </tr>
@@ -113,6 +113,7 @@
             
             if (val !== '') {
                 atualiza_total(obj_qtde, obj_valor_unitario, obj_valor_total);
+                atualiza_total_geral();
             }
         });
     });
@@ -121,6 +122,18 @@
         var valor_total = getValor(obj_qtde.val()) * getValor(obj_valor_unitario.val());
         var valor_final = setMoeda(valor_total);
         obj_valor_total.val(valor_final);
+    }
+
+    function atualiza_total_geral() {
+        $('input[data-option="valor_total"]').each(function(i, el){
+            if (i == 0) {
+                $('#valor_total_geral').text('0,00');
+            }
+            var valor_item = $(el).val();
+            var valor_total_atual = $('#valor_total_geral').text();
+            var soma = getValor(valor_item) + getValor(valor_total_atual);
+            $('#valor_total_geral').text(setMoeda(soma)); 
+        });
     }
 
     function getValor(val){
