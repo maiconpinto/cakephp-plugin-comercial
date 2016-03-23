@@ -83,7 +83,23 @@ class PedidosController extends ComercialAppController
         $this->Item->recursive = 2;
         $itens = $this->Item->findByPedidoId($pedido_id);
         $this->set(compact('pedido', 'itens'));
+    }
 
+    public function atualizar()
+    {
+        $this->autoRender = false;
+        
+        extract($this->request->data);
 
+        if (!empty($item_id)) {
+            $this->loadModel('Comercial.Item');
+            $this->Item->id = $item_id;
+            $this->Item->saveField('qtde', $qtde);
+            $this->Item->saveField('valor_unitario', $valor_unitario);
+            $this->Item->saveField('valor_total', $valor_total);
+            return true;
+        }
+
+        return false;
     }
 }

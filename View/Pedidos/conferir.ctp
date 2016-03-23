@@ -37,7 +37,9 @@
                                 </thead>
                                 <tbody>
                                 <?php foreach ($itens as $p): ?>
-                                <tr>
+                                <tr data-item="<?php echo $p['Item']['id']; ?>" 
+                                data-produto="<?php echo $p['Produto']['id']; ?>" 
+                                data-pedido="<?php echo $pedido['Pedido']['id']; ?>">
                                         <td>
                                             <?php 
                                             echo h($p['Produto']['id']);
@@ -89,6 +91,7 @@
             var obj_qtde = tr.find('input[data-option="qtde"]');
             var obj_valor_unitario = tr.find('input[data-option="valor_unitario"]');
             var obj_valor_total = tr.find('input[data-option="valor_total"]');
+            var item_id = tr.data('item');
 
             if (val == '') {
                 if (tipo == 'qtde') {
@@ -114,6 +117,7 @@
             if (val !== '') {
                 atualiza_total(obj_qtde, obj_valor_unitario, obj_valor_total);
                 atualiza_total_geral();
+                atualiza_bd(item_id, obj_qtde, obj_valor_unitario, obj_valor_total);
             }
         });
     });
@@ -122,6 +126,21 @@
         var valor_total = getValor(obj_qtde.val()) * getValor(obj_valor_unitario.val());
         var valor_final = setMoeda(valor_total);
         obj_valor_total.val(valor_final);
+    }
+
+    function atualiza_bd(item_id, obj_qtde, obj_valor_unitario, obj_valor_total) {
+        
+        var request = $.ajax({
+            url: '<?php echo $this->webroot; ?>comercial/pedidos/atualizar',
+            dataType: 'jsonp',
+            data: {
+                item_id: item_id,
+                qtde: obj_qtde.val(),
+                valor_unitario: obj_valor_unitario.val(),
+                valor_total: obj_valor_total.val(),
+            },
+            type: 'POST'
+        });
     }
 
     function atualiza_total_geral() {
