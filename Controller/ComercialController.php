@@ -39,6 +39,8 @@ class ComercialController extends ComercialAppController
 
     public function aguardando()
     {
-
+        $pedidos = $this->Pedido->find('all', array('conditions' => array('Pedido.status' => '3')));
+        
+        $this->set(compact('pedidos'));
     }
 }
