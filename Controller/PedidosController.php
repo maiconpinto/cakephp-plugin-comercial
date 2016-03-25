@@ -88,7 +88,7 @@ class PedidosController extends ComercialAppController
         $itens = $this->Item->findByPedidoId($pedido_id);
         $this->set(compact('pedido', 'itens'));
 
-        $this->Pedido->statusConferindo($pedido_id);
+        $this->Pedido->statusAndamento($pedido_id);
     }
 
     public function concluir($pedido_id = null)
@@ -122,6 +122,8 @@ class PedidosController extends ComercialAppController
         } else {
             $this->Flash->error('Houve um problema com o Orçamento.');
         }
+
+        $this->Pedido->statusAguardando($pedido_id);
 
         return $this->redirect(array('plugin' => 'comercial', 'admin' => false, 'controller' => 'comercial', 'action' => 'index'));
 

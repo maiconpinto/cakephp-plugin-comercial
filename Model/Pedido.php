@@ -18,16 +18,35 @@ class Pedido extends ComercialAppModel
         }
     }
 
-    public function statusConferindo($id = null)
+    public function statusAndamento($id = null, $sequence = true)
     {
         if (empty($id)) {
             return false;
         }
         
         $this->id = $id;
-        if ($this->field('status') == 1) {
+
+        $change = ($sequence) ? ($this->field('status') == 1) : true;
+        if ($change) {
             $this->saveField('status', 2);
         }
+
+        return true;
+    }
+
+    public function statusAguardando($id = null, $sequence = true)
+    {
+        if (empty($id)) {
+            return false;
+        }
+        
+        $this->id = $id;
+
+        $change = ($sequence) ? ($this->field('status') == 2) : true;
+        if ($change) {
+            $this->saveField('status', 3);
+        }
+
         return true;
     }
 
