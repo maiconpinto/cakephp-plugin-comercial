@@ -106,6 +106,27 @@ class PedidosController extends ComercialAppController
         $this->set(compact('pedido', 'itens'));
     }
 
+    public function enviar($pedido_id = null)
+    {
+        if (empty($pedido_id)) {
+            $this->Flash->error('Pedido não informado.');
+        }
+
+        $pedido = $this->Pedido->findById($pedido_id);
+
+        $this->loadModel('Comercial.Orcamento');
+        $this->Orcamento->create();
+
+        if ($this->Orcamento->save($pedido)) {
+            $this->Flash->success('Orçamento enviado.');
+        } else {
+            $this->Flash->error('Houve um problema com o Orçamento.');
+        }
+
+        return $this->redirect(array('plugin' => 'comercial', 'admin' => false, 'controller' => 'comercial', 'action' => 'index'));
+
+    }
+
     public function atualizar()
     {
         $this->autoRender = false;
