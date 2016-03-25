@@ -1,3 +1,6 @@
+<?php
+$total = 0;
+?>
 <div class="categorias form">
 
     <div class="row">
@@ -36,7 +39,8 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                <?php foreach ($itens as $p): ?>
+                                <?php foreach ($itens as $p): 
+                                $total += $p['Item']['valor_total']; ?>
                                 <tr data-item="<?php echo $p['Item']['id']; ?>" 
                                 data-produto="<?php echo $p['Produto']['id']; ?>" 
                                 data-pedido="<?php echo $pedido['Pedido']['id']; ?>">
@@ -48,13 +52,13 @@
                                         </td>
                                         <td><?php echo h($p['Produto']['nome']); ?>&nbsp;</td>
                                         <td>
-                                            <?php echo $this->Form->input('Item.qtde.', array('label' => false, 'placeholder' => '', 'value' => $p['Item']['qtde'], 'data-option' => 'qtde')); ?>
+                                            <?php echo $this->Form->input('Item.qtde.', array('label' => false, 'placeholder' => '', 'value' => $this->Utils->getValor($p['Item']['qtde']), 'data-option' => 'qtde')); ?>
                                         </td>
                                         <td>
-                                            <?php echo $this->Form->input('Item.valor_unitario.', array('label' => false, 'placeholder' => 'Valor Unitário', 'value' => $p['Item']['valor_unitario'], 'data-option' => 'valor_unitario')); ?>
+                                            <?php echo $this->Form->input('Item.valor_unitario.', array('label' => false, 'placeholder' => 'Valor Unitário', 'value' => $this->Utils->moeda_de_db($p['Item']['valor_unitario']), 'data-option' => 'valor_unitario')); ?>
                                         </td>
                                         <td>
-                                            <?php echo $this->Form->input('Item.valor_total.', array('label' => false, 'placeholder' => 'Valor Total', 'value' => $p['Item']['valor_total'], 'data-option' => 'valor_total')); ?>
+                                            <?php echo $this->Form->input('Item.valor_total.', array('label' => false, 'placeholder' => 'Valor Total', 'value' => $this->Utils->moeda_de_db($p['Item']['valor_total']), 'data-option' => 'valor_total')); ?>
                                         </td>
                                         <td class="actions" align="center">
                                             <?php
@@ -66,7 +70,7 @@
                                 <tfoot>
                                     <tr>
                                         <td colspan="5" align="right">
-                                            R$ <span id="valor_total_geral">0,00</span>
+                                            R$ <span id="valor_total_geral"><?php echo number_format($total, 2, ',', '.'); ?></span>
                                         </td>
                                         <td></td>
                                     </tr>
@@ -111,6 +115,8 @@
             }
 
             if (tipo == 'valor_total') {
+                atualiza_total_geral();
+                atualiza_bd(item_id, obj_qtde, obj_valor_unitario, obj_valor_total);
                 return false;
             }
             
