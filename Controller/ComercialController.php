@@ -4,9 +4,10 @@ App::uses('ComercialAppController', 'Comercial.Controller');
 
 class ComercialController extends ComercialAppController
 {
+    public $uses = array('Comercial.Pedido');
+
     public function index()
     {
-        $this->loadModel('Comercial.Pedido');
         $pedidos = $this->Pedido->find('count');
         $pendentes = $this->Pedido->find('count', array('conditions' => array('Pedido.status' => '1')));
         $andamento = $this->Pedido->find('count', array('conditions' => array('Pedido.status' => '2')));
@@ -17,7 +18,9 @@ class ComercialController extends ComercialAppController
 
     public function pedidos()
     {
+        $pedidos = $this->Pedido->find('all');
         
+        $this->set(compact('pedidos'));
     }
 
     public function pendentes()
