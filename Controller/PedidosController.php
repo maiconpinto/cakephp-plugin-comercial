@@ -87,6 +87,8 @@ class PedidosController extends ComercialAppController
         $this->Item->recursive = 2;
         $itens = $this->Item->findByPedidoId($pedido_id);
         $this->set(compact('pedido', 'itens'));
+
+        $this->Pedido->statusConferindo($pedido_id);
     }
 
     public function atualizar()
