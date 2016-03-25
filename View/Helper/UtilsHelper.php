@@ -37,7 +37,7 @@ class UtilsHelper extends Helper
         $valor_total_calculado = $qtde * $valor_unitario;
 
         if ($valor_total_calculado != $valor_total) {
-            return "R$ {$this->moeda_de_db($valor_total)} <small style='color: red; text-decoration:line-through'>R$ {$this->moeda_de_db($valor_total_calculado)}</small>";
+            return "R$ {$this->moeda_de_db($valor_total)} <br><small style='color: red; text-decoration:line-through'>R$ {$this->moeda_de_db($valor_total_calculado)}</small>";
         }
 
         return "R$ " . $this->moeda_de_db($valor_total);
