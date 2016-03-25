@@ -25,6 +25,12 @@
                 <li>
                     <?= $this->Html->link('Pendentes', array('plugin' => 'comercial', 'admin' => false, 'controller' => 'comercial', 'action' => 'pendentes'), array('icon' => 'dashboard')); ?>
                 </li>
+                <li>
+                    <?= $this->Html->link('Em andamento', array('plugin' => 'comercial', 'admin' => false, 'controller' => 'comercial', 'action' => 'andamento'), array('icon' => 'dashboard')); ?>
+                </li>
+                <li>
+                    <?= $this->Html->link('Aguardando retorno', array('plugin' => 'comercial', 'admin' => false, 'controller' => 'comercial', 'action' => 'aguardando'), array('icon' => 'dashboard')); ?>
+                </li>
             </ul>
         </div>
         <!-- /.sidebar-collapse -->
