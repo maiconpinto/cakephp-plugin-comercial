@@ -2,6 +2,10 @@
 
 class PedidosController extends ComercialAppController
 {
+    public $components = array('Comercial.Utils');
+    
+    public $helpers = array('Comercial.Utils');
+
     private $referer = array('plugin' => 'comercial', 'admin' => false, 'controller' => 'comercial', 'action' => 'index');
 
     public function novo() 
