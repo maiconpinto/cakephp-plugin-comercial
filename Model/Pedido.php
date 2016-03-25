@@ -4,6 +4,13 @@ class Pedido extends ComercialAppModel
 {
     public $useTable = 'pedidos';
 
+    public $hasMany = array(
+        'Itens' => array(
+            'className' => 'Comercial.Item',
+            'foreignKey' => 'pedido_id'
+        )
+    );
+
     public function afterSave($created, $options = array())
     {
         if ($created) {
