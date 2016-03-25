@@ -17,8 +17,8 @@ if (!empty($itens)) {
                 <h1>
                     <i class="fa fa-dashboard fa-fw"> </i>
                     Produtos
-                    <?php echo $this->Html->link('Conferir', array('plugin' => 'comercial', 'admin' => false, 'controller' => 'pedidos', 'action' => 'conferir', $pedido['Pedido']['id']), array('escape' => false, 'class' => 'btn btn-success pull-right', 'style' => 'margin-left: 10px;')); ?>
-                    <?php echo $this->Html->link('Sair', array('plugin' => 'comercial', 'admin' => false, 'controller' => 'comercial', 'action' => 'index'), array('escape' => false, 'icon' => 'arrow-left', 'class' => 'btn btn-primary pull-right')); ?>
+                    <?php echo $this->Html->link('Conferir', array('plugin' => 'comercial', 'admin' => false, 'controller' => 'pedidos', 'action' => 'conferir', $pedido['Pedido']['id']), array('escape' => false, 'class' => 'btn btn-success pull-right', 'style' => 'margin-left: 10px;', 'icon' => 'arrow-right', 'icon-inverse' => true)); ?>
+                    <?php echo $this->Html->link('Sair', array('plugin' => 'comercial', 'admin' => false, 'controller' => 'comercial', 'action' => 'index'), array('escape' => false, 'class' => 'btn btn-primary pull-right')); ?>
                 <small>para Orçamento</small>
                 </h1>
             </div>
