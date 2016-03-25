@@ -13,12 +13,20 @@ class PedidosController extends ComercialAppController
         if ($this->request->is('post')) {
             $this->Pedido->create();
 
-            if ($this->Pedido->save($this->request->data)) {
+            if (!empty($this->request->data['Pedido']['cliente_id'])) {
+                unset($this->request->data['Cliente']);
+            }
+
+            if ($this->Pedido->saveAll($this->request->data)) {
                 $this->Flash->success('Informe os produtos deste pedido');
                 return $this->redirect(array('action' => 'produtos', $this->Pedido->id));
             }
             $this->Flash->error('Não foi possível cadastrar seu pedido, tente novamente.');
         }
+
+        $clientes = $this->Pedido->Cliente->find('list', array('fields' => array('Cliente.id', 'Cliente.email', 'Cliente.nome')));
+
+        $this->set(compact('clientes'));
     }
 
     public function produtos($pedido_id = null)

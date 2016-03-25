@@ -4,6 +4,8 @@ class Pedido extends ComercialAppModel
 {
     public $useTable = 'pedidos';
 
+    public $belongsTo = array('Comercial.Cliente');
+
     public $hasMany = array(
         'Itens' => array(
             'className' => 'Comercial.Item',
