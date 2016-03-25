@@ -19,13 +19,15 @@ class ComercialController extends ComercialAppController
     public function pedidos()
     {
         $pedidos = $this->Pedido->find('all');
-        
+
         $this->set(compact('pedidos'));
     }
 
     public function pendentes()
     {
-
+        $pedidos = $this->Pedido->find('all', array('conditions' => array('Pedido.status' => '1')));
+        
+        $this->set(compact('pedidos'));
     }
 
     public function andamento()
