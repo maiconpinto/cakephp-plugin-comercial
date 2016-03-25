@@ -9,7 +9,7 @@ $total = 0;
                 <h1>
                     <i class="fa fa-dashboard fa-fw"> </i>
                     Produtos
-                    <?php echo $this->Html->link('Concluir', array('plugin' => 'comercial', 'admin' => false, 'controller' => 'pedidos', 'action' => 'concluir', $pedido['Pedido']['id']), array('escape' => false, 'class' => 'btn btn-success pull-right', 'style' => 'margin-left: 10px;')); ?>
+                    <?php echo $this->Html->link('Concluir', array('plugin' => 'comercial', 'admin' => false, 'controller' => 'pedidos', 'action' => 'concluir', $pedido['Pedido']['id']), array('escape' => false, 'class' => 'btn btn-success pull-right', 'style' => 'margin-left: 10px;', 'icon' => 'arrow-right', 'icon-inverse' => true)); ?>
                     <?php echo $this->Html->link('Voltar', array('plugin' => 'comercial', 'admin' => false, 'controller' => 'pedidos', 'action' => 'produtos', $pedido['Pedido']['id']), array('escape' => false, 'icon' => 'arrow-left', 'class' => 'btn btn-primary pull-right')); ?>
                 <small>do Orçamento</small>
                 </h1>
