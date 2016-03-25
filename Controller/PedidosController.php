@@ -91,6 +91,21 @@ class PedidosController extends ComercialAppController
         $this->Pedido->statusConferindo($pedido_id);
     }
 
+    public function concluir($pedido_id = null)
+    {
+        if (empty($pedido_id)) {
+            $this->Flash->error('Pedido não informado.');
+            return $this->redirect(array('plugin' => 'comercial', 'admin' => false, 'controller' => 'comercial', 'action' => 'index'));
+        }
+
+        $pedido = $this->Pedido->findById($pedido_id);
+
+        $this->loadModel('Comercial.Item');
+        $this->Item->recursive = 2;
+        $itens = $this->Item->findByPedidoId($pedido_id);
+        $this->set(compact('pedido', 'itens'));
+    }
+
     public function atualizar()
     {
         $this->autoRender = false;
