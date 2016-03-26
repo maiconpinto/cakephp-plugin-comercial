@@ -66,12 +66,13 @@ $total = 0;
                                 <tbody>
                                 <?php foreach ($itens as $p): 
                                 $total += $p['Item']['valor_total'];
+                                $nome = (!empty($p['Item']['nome'])) ? $p['Item']['nome'] : $p['Produto']['nome'];
                                 ?>
                                 <tr>
                                     <td>
                                         <?php  echo h($p['Produto']['id']); ?>
                                     </td>
-                                    <td><?php echo h($p['Produto']['nome']); ?></td>
+                                    <td><?php echo h($nome); ?></td>
                                     <td>
                                         <?php echo $this->Utils->getValor($p['Item']['qtde']); ?>
                                     </td>

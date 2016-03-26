@@ -147,6 +147,7 @@ class PedidosController extends ComercialAppController
         if (!empty($item_id)) {
             $this->loadModel('Comercial.Item');
             $this->Item->id = $item_id;
+            $this->Item->saveField('nome', $nome);
             $this->Item->saveField('qtde', $qtde);
             $this->Item->saveField('valor_unitario', $this->Utils->moeda_para_db($valor_unitario));
             $this->Item->saveField('valor_total', $this->Utils->moeda_para_db($valor_total))    ;

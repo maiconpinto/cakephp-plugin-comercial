@@ -74,7 +74,8 @@ if (empty($itens)) {
                                 </thead>
                                 <tbody>
                                 <?php foreach ($itens as $p): 
-                                $total += $p['Item']['valor_total']; ?>
+                                $total += $p['Item']['valor_total']; 
+                                $nome = (!empty($p['Item']['nome'])) ? $p['Item']['nome'] : $p['Produto']['nome']; ?>
                                 <tr data-item="<?php echo $p['Item']['id']; ?>" 
                                 data-produto="<?php echo $p['Produto']['id']; ?>" 
                                 data-pedido="<?php echo $pedido['Pedido']['id']; ?>">
@@ -84,7 +85,8 @@ if (empty($itens)) {
                                             echo $this->Form->input('Item.id.', array('type' => 'hidden', 'value' => $p['Item']['id']));
                                             ?>
                                         </td>
-                                        <td><?php echo h($p['Produto']['nome']); ?>&nbsp;</td>
+                                        <td>
+                                            <?php echo $this->Form->input('Item.nome.', array('label' => false, 'placeholder' => $nome, 'value' => $nome, 'data-option' => 'nome')); ?>
                                         <td>
                                             <?php echo $this->Form->input('Item.qtde.', array('label' => false, 'placeholder' => '', 'value' => $this->Utils->getValor($p['Item']['qtde']), 'data-option' => 'qtde')); ?>
                                         </td>
@@ -126,12 +128,17 @@ if (empty($itens)) {
             var tipo = $(this).data('option');
             
             var tr = $(this).parents('tr');
+            var obj_nome = tr.find('input[data-option="nome"]');
             var obj_qtde = tr.find('input[data-option="qtde"]');
             var obj_valor_unitario = tr.find('input[data-option="valor_unitario"]');
             var obj_valor_total = tr.find('input[data-option="valor_total"]');
             var item_id = tr.data('item');
 
             if (val == '') {
+                if (tipo == 'nome') {
+                    obj_nome.val(obj_nome.attr('placeholder'));
+                    return false;
+                }
                 if (tipo == 'qtde') {
                     obj_qtde.val(1);
                 }
@@ -150,14 +157,14 @@ if (empty($itens)) {
 
             if (tipo == 'valor_total') {
                 atualiza_total_geral();
-                atualiza_bd(item_id, obj_qtde, obj_valor_unitario, obj_valor_total);
+                atualiza_bd(item_id, obj_nome, obj_qtde, obj_valor_unitario, obj_valor_total);
                 return false;
             }
             
             if (val !== '') {
                 atualiza_total(obj_qtde, obj_valor_unitario, obj_valor_total);
                 atualiza_total_geral();
-                atualiza_bd(item_id, obj_qtde, obj_valor_unitario, obj_valor_total);
+                atualiza_bd(item_id, obj_nome, obj_qtde, obj_valor_unitario, obj_valor_total);
             }
         });
     });
@@ -168,13 +175,14 @@ if (empty($itens)) {
         obj_valor_total.val(valor_final);
     }
 
-    function atualiza_bd(item_id, obj_qtde, obj_valor_unitario, obj_valor_total) {
+    function atualiza_bd(item_id, obj_nome, obj_qtde, obj_valor_unitario, obj_valor_total) {
         
         var request = $.ajax({
             url: '<?php echo $this->webroot; ?>comercial/pedidos/atualizar',
             dataType: 'jsonp',
             data: {
                 item_id: item_id,
+                nome: obj_nome.val(),
                 qtde: obj_qtde.val(),
                 valor_unitario: obj_valor_unitario.val(),
                 valor_total: obj_valor_total.val(),
