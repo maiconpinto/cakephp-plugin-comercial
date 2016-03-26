@@ -19,7 +19,34 @@ $total = 0;
 
     <div class="row">
         <div class="col-md-12">
-            <div class="panel panel-default">
+
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    Cliente
+                </div>
+                <div class="panel-body">
+                    <div class="dataTable_wrapper">
+                        <table class="table table-striped table-bordered table-hover">
+                            <tbody>
+                                <tr>
+                                    <td class="col-xs-3">Nome</td>
+                                    <td class="col-xs-9"><?php echo $cliente['Cliente']['nome'] ?></td>
+                                </tr>
+                                <tr>
+                                    <td class="col-xs-3">E-mail</td>
+                                    <td class="col-xs-9"><?php echo $cliente['Cliente']['email'] ?></td>
+                                </tr>
+                                <tr>
+                                    <td class="col-xs-3">Telefone</td>
+                                    <td class="col-xs-9"><?php echo $cliente['Cliente']['telefone'] ?></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-primary">
                 <div class="panel-heading">
                     Produtos
                 </div>

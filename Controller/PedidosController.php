@@ -111,7 +111,8 @@ class PedidosController extends ComercialAppController
         $this->loadModel('Comercial.Item');
         $this->Item->recursive = 2;
         $itens = $this->Item->findByPedidoId($pedido_id);
-        $this->set(compact('pedido', 'itens'));
+        $cliente = $this->Pedido->Cliente->find('first', array('conditions' => array('Cliente.id' => $pedido['Pedido']['cliente_id'])));
+        $this->set(compact('pedido', 'itens', 'cliente'));
     }
 
     public function enviar($pedido_id = null)
