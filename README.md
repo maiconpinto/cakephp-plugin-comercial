@@ -2,4 +2,4 @@
 
 ## Theme Admin
 
-* Configurado para usar [Theme Admin](https://github.com/maiconpinto/cakephp-themed-admin)
+* Configurado para usar [Theme Admin](https://github.com/maiconpinto/cakephp-sb-theme)
