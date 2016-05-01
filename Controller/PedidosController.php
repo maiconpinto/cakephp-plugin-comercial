@@ -10,23 +10,23 @@ class PedidosController extends ComercialAppController
 
     public function novo() 
     {
+        $this->Pedido->create();
+        $id = $this->Pedido->getSaveProximoNumero();
+        
         if ($this->request->is('post')) {
-            $this->Pedido->create();
-
-            if (!empty($this->request->data['Pedido']['cliente_id'])) {
-                unset($this->request->data['Cliente']);
-            }
-
+            
             if ($this->Pedido->saveAll($this->request->data)) {
                 $this->Flash->success('Informe os produtos deste pedido');
-                return $this->redirect(array('action' => 'produtos', $this->Pedido->id));
+                $pedido_id = $this->Pedido->id;
+                $this->Pedido->statusAndamento($pedido_id);
+                return $this->redirect(array('action' => 'produtos', $pedido_id));
             }
             $this->Flash->error('Não foi possível cadastrar seu pedido, tente novamente.');
         }
 
         $clientes = $this->Pedido->Cliente->find('list', array('fields' => array('Cliente.id', 'Cliente.email', 'Cliente.nome')));
 
-        $this->set(compact('clientes'));
+        $this->set(compact('clientes', 'id'));
     }
 
     public function produtos($pedido_id = null)
@@ -95,8 +95,6 @@ class PedidosController extends ComercialAppController
         $this->Item->recursive = 2;
         $itens = $this->Item->findByPedidoId($pedido_id);
         $this->set(compact('pedido', 'itens'));
-
-        $this->Pedido->statusAndamento($pedido_id);
     }
 
     public function concluir($pedido_id = null)
