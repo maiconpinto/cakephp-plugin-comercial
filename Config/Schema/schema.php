@@ -70,6 +70,7 @@ class ComercialSchema extends CakeSchema {
 		'cliente_id' => array('type' => 'integer', 'null' => false, 'default' => null, 'unsigned' => false),
 		'status' => array('type' => 'integer', 'null' => false, 'default' => null, 'unsigned' => false),
 		'observacoes' => array('type' => 'text', 'null' => false, 'default' => null, 'collate' => 'latin1_swedish_ci', 'charset' => 'latin1'),
+		'user_id' => array('type' => 'integer', 'null' => false, 'default' => null, 'unsigned' => false),
 		'indexes' => array(
 			'PRIMARY' => array('column' => 'id', 'unique' => 1)
 		),
