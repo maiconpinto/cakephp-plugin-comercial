@@ -8,10 +8,9 @@ $total = 0;
             <div class="page-header">
                 <h1>
                     <i class="fa fa-dashboard fa-fw"> </i>
-                    Produtos
+                    Finalizar
                     <?php echo $this->Html->link('Enviar Orçamento', array('plugin' => 'comercial', 'admin' => false, 'controller' => 'pedidos', 'action' => 'enviar', $pedido['Pedido']['id']), array('escape' => false, 'class' => 'btn btn-success pull-right', 'style' => 'margin-left: 10px;')); ?>
                     <?php echo $this->Html->link('Voltar', array('plugin' => 'comercial', 'admin' => false, 'controller' => 'pedidos', 'action' => 'conferir', $pedido['Pedido']['id']), array('escape' => false, 'icon' => 'arrow-left', 'class' => 'btn btn-primary pull-right')); ?>
-                <small>do Orçamento</small>
                 </h1>
             </div>
         </div>
