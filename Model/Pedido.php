@@ -12,6 +12,15 @@ class Pedido extends ComercialAppModel
             'foreignKey' => 'pedido_id'
         )
     );
+    
+    public function beforeSave($options = array())
+    {
+        if (!empty($this->data['Pedido']['cliente_id'])) {
+            unset($this->data['Cliente']);
+        }
+        
+        return true;
+    }
 
     public function afterSave($created, $options = array())
     {
@@ -19,8 +28,8 @@ class Pedido extends ComercialAppModel
             $this->saveField('status', '1');
         }
     }
-
-    public function statusAndamento($id = null, $sequence = true)
+    
+    public function statusAguardando($id = null, $sequence = true)
     {
         if (empty($id)) {
             return false;
@@ -35,8 +44,8 @@ class Pedido extends ComercialAppModel
 
         return true;
     }
-
-    public function statusAguardando($id = null, $sequence = true)
+    
+    public function statusConfirmado($id = null, $sequence = true)
     {
         if (empty($id)) {
             return false;
@@ -51,5 +60,18 @@ class Pedido extends ComercialAppModel
 
         return true;
     }
-
+    
+    public function getProximoNumero()
+    {
+        $pedido = $this->find('first', array('order' => array('Pedido.id' => 'DESC')));
+        return $pedido['Pedido']['id'] + 1;
+    }
+    
+    public function getSaveProximoNumero()
+    {
+        $id = $this->getProximoNumero();
+        $this->id = $id;
+        $this->saveField('numero', $id);
+        return $id;
+    }
 }
