@@ -32,30 +32,6 @@
     </div>
 
     <div class="col-lg-3 col-md-6">
-        <div class="panel panel-red">
-            <div class="panel-heading">
-                <div class="row">
-                    <div class="col-xs-3">
-                        <i class="fa fa-copy fa-5x"></i>
-                    </div>
-                    <div class="col-xs-9 text-right">
-                        <div class="huge"><?= (!empty($pendentes)) ? $pendentes : 0; ?></div>
-                        <div>Pendentes</div>
-                    </div>
-                </div>
-            </div>
-            <?php
-            $link = '<div class="panel-footer">
-                    <span class="pull-left">Detalhes</span>
-                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                    <div class="clearfix"></div>
-                </div>'; 
-            echo $this->Html->link($link, array('plugin' => 'comercial', 'admin' => false, 'controller' => 'comercial', 'action' => 'pendentes'), array('escape' => false));
-            ?>
-        </div>
-    </div>
-
-    <div class="col-lg-3 col-md-6">
         <div class="panel panel-green">
             <div class="panel-heading">
                 <div class="row">
@@ -88,7 +64,7 @@
                     </div>
                     <div class="col-xs-9 text-right">
                         <div class="huge"><?= (!empty($aguardando)) ? $aguardando : 0; ?></div>
-                        <div>Aguardando retorno</div>
+                        <div>Aguardando confirmação</div>
                     </div>
                 </div>
             </div>
@@ -99,6 +75,30 @@
                     <div class="clearfix"></div>
                 </div>'; 
             echo $this->Html->link($link, array('plugin' => 'comercial', 'admin' => false, 'controller' => 'comercial', 'action' => 'aguardando'), array('escape' => false));
+            ?>
+        </div>
+    </div>
+  
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-blue">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-copy fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge"><?= (!empty($confirmados)) ? $confirmados : 0; ?></div>
+                        <div>Confirmados</div>
+                    </div>
+                </div>
+            </div>
+            <?php
+            $link = '<div class="panel-footer">
+                    <span class="pull-left">Detalhes</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>'; 
+            echo $this->Html->link($link, array('plugin' => 'comercial', 'admin' => false, 'controller' => 'comercial', 'action' => 'confirmados'), array('escape' => false));
             ?>
         </div>
     </div>
