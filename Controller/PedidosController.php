@@ -14,11 +14,10 @@ class PedidosController extends ComercialAppController
         $id = $this->Pedido->getSaveProximoNumero();
         
         if ($this->request->is('post')) {
-            
+            $this->request->data['Pedido']['user_id'] = $this->Auth->user('id');
             if ($this->Pedido->saveAll($this->request->data)) {
-                $this->Flash->success('Informe os produtos deste pedido');
                 $pedido_id = $this->Pedido->id;
-                $this->Pedido->statusAndamento($pedido_id);
+                $this->Flash->success('Informe os produtos deste pedido');
                 return $this->redirect(array('action' => 'produtos', $pedido_id));
             }
             $this->Flash->error('Não foi possível cadastrar seu pedido, tente novamente.');

@@ -23,7 +23,7 @@ $this->Html->script('incs/editor', array('inline' => false));
             <div class="col-md-12">
                 
                 <?php echo $this->Form->create('Pedido', array('role' => 'form')); ?>
-                
+                <?php  echo $this->Form->input('id', array('value' => $id)); ?>
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             Pedido
