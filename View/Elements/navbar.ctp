@@ -20,16 +20,25 @@
                     <?= $this->Html->link('Home', array('plugin' => 'comercial', 'admin' => false, 'controller' => 'comercial', 'action' => 'index'), array('icon' => 'dashboard')); ?>
                 </li>
                 <li>
-                    <?= $this->Html->link('Pedidos', array('plugin' => 'comercial', 'admin' => false, 'controller' => 'comercial', 'action' => 'pedidos'), array('icon' => 'dashboard')); ?>
+                    <hr />
                 </li>
                 <li>
-                    <?= $this->Html->link('Pendentes', array('plugin' => 'comercial', 'admin' => false, 'controller' => 'comercial', 'action' => 'pendentes'), array('icon' => 'dashboard')); ?>
+                    <?= $this->Html->link('Novo Pedido', array('plugin' => 'comercial', 'admin' => false, 'controller' => 'pedidos', 'action' => 'novo'), array('icon' => 'dashboard')); ?>
+                </li>
+                <li>
+                    <hr />
+                </li>
+                <li>
+                    <?= $this->Html->link('Pedidos', array('plugin' => 'comercial', 'admin' => false, 'controller' => 'comercial', 'action' => 'pedidos'), array('icon' => 'dashboard')); ?>
                 </li>
                 <li>
                     <?= $this->Html->link('Em andamento', array('plugin' => 'comercial', 'admin' => false, 'controller' => 'comercial', 'action' => 'andamento'), array('icon' => 'dashboard')); ?>
                 </li>
                 <li>
-                    <?= $this->Html->link('Aguardando retorno', array('plugin' => 'comercial', 'admin' => false, 'controller' => 'comercial', 'action' => 'aguardando'), array('icon' => 'dashboard')); ?>
+                    <?= $this->Html->link('Aguardando confirmação', array('plugin' => 'comercial', 'admin' => false, 'controller' => 'comercial', 'action' => 'aguardando'), array('icon' => 'dashboard')); ?>
+                </li>
+                <li>
+                    <?= $this->Html->link('Confirmados', array('plugin' => 'comercial', 'admin' => false, 'controller' => 'comercial', 'action' => 'confirmados'), array('icon' => 'dashboard')); ?>
                 </li>
             </ul>
         </div>
