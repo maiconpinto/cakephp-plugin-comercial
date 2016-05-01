@@ -32,7 +32,7 @@ $this->Html->script('incs/editor', array('inline' => false));
                             <div class="row">
                                 <div class="col-md-12">
 
-                                    <?php  echo $this->Form->input('numero', array('label' => 'Identificação *', 'placeholder' => 'Número do pedido')); ?>
+                                    <?php  echo $this->Form->input('numero', array('label' => 'Identificação *', 'placeholder' => 'Número do pedido', 'value' => $id, 'disabled' => true)); ?>
 
                                 </div> <!-- col-md-12 -->
                             </div> <!-- row -->
