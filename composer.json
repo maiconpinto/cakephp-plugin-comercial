@@ -8,8 +8,7 @@
 		}
 	],
 	"type": "cakephp-plugin",
-  "require": {
-		"composer/installers": "~1.0",
-		"maiconpinto/webroot": "dev-master"
+  	"require": {
+		"composer/installers": "~1.0"
 	}
 }
