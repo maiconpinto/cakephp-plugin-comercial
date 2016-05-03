@@ -2,7 +2,7 @@
 
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="page-header">Aguardando retorno</h1>
+        <h1 class="page-header">Aguardando confirmação</h1>
     </div>
     <!-- /.col-lg-12 -->
 </div>
