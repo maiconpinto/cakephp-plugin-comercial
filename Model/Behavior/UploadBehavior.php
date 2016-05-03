@@ -37,7 +37,7 @@ class UploadBehavior extends ModelBehavior {
 		'maxWidth' => 0,
 		'minWidth' => 0,
 		'thumbnails' => true,
-		'thumbnailMethod' => 'imagick',
+		'thumbnailMethod' => 'php',
 		'thumbnailName' => null,
 		'thumbnailPath' => null,
 		'thumbnailPrefixStyle' => true,
