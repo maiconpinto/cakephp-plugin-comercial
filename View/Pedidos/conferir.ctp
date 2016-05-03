@@ -14,7 +14,7 @@ if (empty($itens)) {
                     <i class="fa fa-dashboard fa-fw"> </i>
                     Produtos
                     <?php echo $this->Html->link(
-                    'Concluir', 
+                    'Seguir', 
                     array(
                         'plugin' => 'comercial', 
                         'admin' => false, 

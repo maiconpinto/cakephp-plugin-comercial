@@ -23,7 +23,7 @@ if (empty($produtos_selecionados)) {
                     <i class="fa fa-dashboard fa-fw"> </i>
                     Produtos
                     <?php echo $this->Html->link(
-                    'Conferir', 
+                    'Seguir', 
                     array(
                         'plugin' => 'comercial', 
                         'admin' => false, 
