@@ -22,6 +22,8 @@
                             <tr>
                                 <th class="col-xs-1">ID</th>
                                 <th>Número</th>
+                                <th class="col-xs-1">Produtos(Qtde)</th>
+                                <th class="col-xs-1">Ações</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -29,6 +31,8 @@
                         <tr>
                             <td><?php echo h($p['Pedido']['id']); ?>&nbsp;</td>
                             <td><?php echo h($p['Pedido']['numero']); ?>&nbsp;</td>
+                            <td align="center"><?php echo count($p['Itens']); ?>&nbsp;</td>
+                            <td><?php echo $this->Html->link('Continuar', array('plugin' => 'comercial', 'admin' => false, 'controller' => 'pedidos', 'action' => 'produtos', $p['Pedido']['id']), array('class' => 'btn btn-primary')); ?></td>
                         </tr>
                         <?php endforeach; ?>
                         </tbody>
