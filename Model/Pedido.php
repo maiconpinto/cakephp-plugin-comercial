@@ -12,16 +12,15 @@ class Pedido extends ComercialAppModel
             'foreignKey' => 'pedido_id'
         )
     );
-    
-    public function beforeSave($options = array())
-    {
+
+    public function beforeValidate($options = array()) {
         if (!empty($this->data['Pedido']['cliente_id'])) {
             unset($this->data['Cliente']);
         }
-        
+
         return true;
     }
-
+    
     public function afterSave($created, $options = array())
     {
         if ($created) {
@@ -64,7 +63,7 @@ class Pedido extends ComercialAppModel
     public function getProximoNumero()
     {
         $pedido = $this->find('first', array('order' => array('Pedido.id' => 'DESC')));
-        return $pedido['Pedido']['id'] + 1;
+        return isset($pedido['Pedido']['id']) ? $pedido['Pedido']['id'] + 1 : 1;
     }
     
     public function getSaveProximoNumero()
