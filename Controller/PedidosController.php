@@ -156,7 +156,7 @@ class PedidosController extends ComercialAppController
         return false;
     }
 
-    public function confirmar_venda($pedido_id = null)
+    public function confirmar_orcamento($pedido_id = null)
     {
         if (empty($pedido_id)) {
             $this->Flash->error('Pedido não informado.');
