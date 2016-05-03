@@ -66,11 +66,16 @@ class Pedido extends ComercialAppModel
         return isset($pedido['Pedido']['id']) ? $pedido['Pedido']['id'] + 1 : 1;
     }
     
-    public function getSaveProximoNumero()
+    public function getSaveProximoNumero($id_user = null)
     {
         $id = $this->getProximoNumero();
         $this->id = $id;
         $this->saveField('numero', $id);
+
+        if (!empty($id_user)) {
+            $this->saveField('user_id', $id_user);
+        }
+        
         return $id;
     }
 }

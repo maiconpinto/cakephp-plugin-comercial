@@ -23,7 +23,7 @@ class PedidosController extends ComercialAppController
         }
 
         $this->Pedido->create();
-        $id = $this->Pedido->getSaveProximoNumero();
+        $id = $this->Pedido->getSaveProximoNumero($this->Auth->user('id'));
 
         $clientes = $this->Pedido->Cliente->find('list', array('fields' => array('Cliente.id', 'Cliente.email', 'Cliente.nome')));
 
