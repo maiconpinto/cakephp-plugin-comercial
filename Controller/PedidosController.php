@@ -10,18 +10,20 @@ class PedidosController extends ComercialAppController
 
     public function novo() 
     {
-        $this->Pedido->create();
-        $id = $this->Pedido->getSaveProximoNumero();
-        
         if ($this->request->is('post')) {
             $this->request->data['Pedido']['user_id'] = $this->Auth->user('id');
+
             if ($this->Pedido->saveAll($this->request->data)) {
                 $pedido_id = $this->Pedido->id;
                 $this->Flash->success('Informe os produtos deste pedido');
                 return $this->redirect(array('action' => 'produtos', $pedido_id));
             }
+            
             $this->Flash->error('Não foi possível cadastrar seu pedido, tente novamente.');
         }
+
+        $this->Pedido->create();
+        $id = $this->Pedido->getSaveProximoNumero();
 
         $clientes = $this->Pedido->Cliente->find('list', array('fields' => array('Cliente.id', 'Cliente.email', 'Cliente.nome')));
 
