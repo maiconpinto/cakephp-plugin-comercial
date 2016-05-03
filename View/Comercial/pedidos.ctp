@@ -1,5 +1,8 @@
 <?= $this->element("/scripts/datatables"); ?>
 
+<?php
+$lista_status_pedido = Configure::read('Pedidos.status');
+?>
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header">Pedidos</h1>
@@ -22,6 +25,7 @@
                             <tr>
                                 <th class="col-xs-1">ID</th>
                                 <th>Número</th>
+                                <th>Status</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -29,6 +33,7 @@
                         <tr>
                             <td><?php echo h($p['Pedido']['id']); ?>&nbsp;</td>
                             <td><?php echo h($p['Pedido']['numero']); ?>&nbsp;</td>
+                            <td><?php echo $lista_status_pedido[$p['Pedido']['status']]; ?>&nbsp;</td>
                         </tr>
                         <?php endforeach; ?>
                         </tbody>
