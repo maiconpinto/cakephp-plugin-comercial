@@ -2,7 +2,7 @@
 
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="page-header">Confirmados</h1>
+        <h1 class="page-header">Pedidos Confirmados</h1>
     </div>
     <!-- /.col-lg-12 -->
 </div>
@@ -22,6 +22,7 @@
                             <tr>
                                 <th class="col-xs-1">ID</th>
                                 <th>Número</th>
+                                <th class="col-xs-1">Ações</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -29,6 +30,7 @@
                         <tr>
                             <td><?php echo h($p['Pedido']['id']); ?>&nbsp;</td>
                             <td><?php echo h($p['Pedido']['numero']); ?>&nbsp;</td>
+                            <td><?php echo $this->Html->link('Ver', array('plugin' => 'comercial', 'admin' => false, 'controller' => 'pedidos', 'action' => 'visualizar', $p['Pedido']['id']), array('class' => 'btn btn-primary')); ?></td>
                         </tr>
                         <?php endforeach; ?>
                         </tbody>
