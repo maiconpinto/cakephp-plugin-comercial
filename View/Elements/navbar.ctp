@@ -19,15 +19,11 @@
                 <li>
                     <?= $this->Html->link('Home', array('plugin' => 'comercial', 'admin' => false, 'controller' => 'comercial', 'action' => 'index'), array('icon' => 'dashboard')); ?>
                 </li>
-                <li>
-                    <hr />
-                </li>
+                
                 <li>
                     <?= $this->Html->link('Novo Pedido', array('plugin' => 'comercial', 'admin' => false, 'controller' => 'pedidos', 'action' => 'novo'), array('icon' => 'dashboard')); ?>
                 </li>
-                <li>
-                    <hr />
-                </li>
+                
                 <li>
                     <?= $this->Html->link('Pedidos', array('plugin' => 'comercial', 'admin' => false, 'controller' => 'comercial', 'action' => 'pedidos'), array('icon' => 'dashboard')); ?>
                 </li>
