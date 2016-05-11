@@ -178,4 +178,47 @@ class PedidosController extends ComercialAppController
         return $this->redirect(array('plugin' => 'comercial', 'admin' => false, 'controller' => 'comercial', 'action' => 'index'));
 
     }
+
+    public function visualizar($pedido_id = null)
+    {
+        if (empty($pedido_id)) {
+            $this->Flash->error('Pedido não informado.');
+            return $this->redirect(array('plugin' => 'comercial', 'admin' => false, 'controller' => 'comercial', 'action' => 'index'));
+        }
+
+        $pedido = $this->Pedido->findById($pedido_id);
+
+        $this->loadModel('Comercial.Item');
+        $this->Item->recursive = 2;
+        $itens = $this->Item->findByPedidoId($pedido_id);
+        $cliente = $this->Pedido->Cliente->find('first', array('conditions' => array('Cliente.id' => $pedido['Pedido']['cliente_id'])));
+        $this->set(compact('pedido', 'itens', 'cliente'));
+    }
+
+    public function folha_producao($item_id = null, $ajax = null)
+    {
+        if (empty($item_id)) {
+            $this->Flash->error('Item para impressão não encontrado.');
+            return $this->redirect(array('plugin' => 'comercial', 'admin' => false, 'controller' => 'comercial', 'action' => 'confirmados'));
+        }
+
+        if (!empty($ajax)) {
+            $this->layout = 'print';
+        }
+
+        $this->loadModel('Comercial.Item');
+        $this->loadModel('Comercial.Pedido');
+        $this->loadModel('Comercial.Cliente');
+        $this->loadModel('Produto');
+
+        $item = $this->Item->findById($item_id);
+
+        $pedido = $this->Pedido->findById($item['Item']['pedido_id']);
+        
+        $produto = $this->Produto->findById($item['Item']['produto_id']);
+
+        $cliente = $this->Cliente->findById($pedido['Pedido']['cliente_id']);
+
+        $this->set(compact('item', 'pedido', 'produto', 'cliente'));
+    }
 }

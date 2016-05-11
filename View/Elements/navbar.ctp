@@ -19,9 +19,9 @@
                 <li>
                     <?= $this->Html->link('Home', array('plugin' => 'comercial', 'admin' => false, 'controller' => 'comercial', 'action' => 'index'), array('icon' => 'dashboard')); ?>
                 </li>
-                <li>
+                <li class="featured">
                     <?= $this->Html->link('Novo Pedido', array('plugin' => 'comercial', 'admin' => false, 'controller' => 'pedidos', 'action' => 'novo'), array('icon' => 'dashboard')); ?>
-                </li>
+                </li>                
                 <li>
                     <?= $this->Html->link('Pedidos', array('plugin' => 'comercial', 'admin' => false, 'controller' => 'comercial', 'action' => 'pedidos'), array('icon' => 'dashboard')); ?>
                 </li>
@@ -40,3 +40,13 @@
     </div>
     <!-- /.navbar-static-side -->
 </nav>
+
+<style type="text/css">
+    .nav li.featured a {
+        background-color: #9ACFF5;
+    }
+    .nav li.featured a.active {
+        background-color: #259DF2;
+        color: #23527c;
+    }
+</style>

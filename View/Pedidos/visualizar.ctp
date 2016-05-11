@@ -8,10 +8,8 @@ $total = 0;
             <div class="page-header">
                 <h1>
                     <i class="fa fa-dashboard fa-fw"> </i>
-                    Finalizar Pedido
-                    <?php echo $this->Html->link('Confirmar orçamento', array('plugin' => 'comercial', 'admin' => false, 'controller' => 'pedidos', 'action' => 'confirmar_orcamento', $pedido['Pedido']['id']), array('escape' => false, 'class' => 'btn btn-success pull-right', 'style' => 'margin-left: 10px;')); ?>
-                    <?php echo $this->Html->link('Enviar Orçamento', array('plugin' => 'comercial', 'admin' => false, 'controller' => 'pedidos', 'action' => 'enviar', $pedido['Pedido']['id']), array('escape' => false, 'class' => 'btn btn-warning pull-right', 'style' => 'margin-left: 10px;')); ?>
-                    <?php echo $this->Html->link('Voltar', array('plugin' => 'comercial', 'admin' => false, 'controller' => 'pedidos', 'action' => 'conferir', $pedido['Pedido']['id']), array('escape' => false, 'icon' => 'arrow-left', 'class' => 'btn btn-primary pull-right')); ?>
+                    Pedido Confirmado
+                    <?php echo $this->Html->link('Voltar', array('plugin' => 'comercial', 'admin' => false, 'controller' => 'comercial', 'action' => 'confirmados'), array('escape' => false, 'icon' => 'arrow-left', 'class' => 'btn btn-primary pull-right')); ?>
                 </h1>
             </div>
         </div>
@@ -57,10 +55,11 @@ $total = 0;
                                 <thead>
                                     <tr>
                                         <th class="col-xs-1">ID</th>
-                                        <th class="col-xs-5">Nome</th>
+                                        <th class="col-xs-4">Nome</th>
                                         <th class="col-xs-2">Qtde</th>
                                         <th class="col-xs-2">Valor <small>Unitário</small> </th>
                                         <th class="col-xs-2">Valor <small>Total</small> </th>
+                                        <th class="col-xs-1">Ações</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -81,6 +80,9 @@ $total = 0;
                                     </td>
                                     <td>
                                         <?php echo $this->Utils->itemValorTotal($p['Item']['qtde'], $p['Item']['valor_unitario'], $p['Item']['valor_total']); ?>
+                                    </td>
+                                    <td align="center">
+                                        <?php echo $this->Html->link('', array('plugin' => 'comercial', 'admin' => false, 'controller' => 'pedidos', 'action' => 'folha_producao', $p['Item']['id']), array('icon' => 'print', 'alt' => 'Imprimir', 'title' => 'Imprimir Folha Produção')); ?>
                                     </td>
                                 </tr>
                                 <?php endforeach; ?>
