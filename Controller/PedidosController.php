@@ -11,7 +11,7 @@ class PedidosController extends ComercialAppController
     public function novo() 
     {
         if ($this->request->is('post')) {
-            $this->request->data['Pedido']['user_id'] = $this->Auth->user('id');
+            $this->request->data['Pedido']['usuario_id'] = $this->Auth->user('id');
 
             if ($this->Pedido->saveAll($this->request->data)) {
                 $pedido_id = $this->Pedido->id;

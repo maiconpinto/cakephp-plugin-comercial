@@ -67,10 +67,10 @@ class ComercialSchema extends CakeSchema {
 		'created' => array('type' => 'integer', 'null' => false, 'default' => null, 'unsigned' => false),
 		'modified' => array('type' => 'integer', 'null' => false, 'default' => null, 'unsigned' => false),
 		'numero' => array('type' => 'string', 'null' => false, 'default' => null, 'collate' => 'latin1_swedish_ci', 'charset' => 'latin1'),
-		'cliente_id' => array('type' => 'integer', 'null' => false, 'default' => null, 'unsigned' => false),
-		'status' => array('type' => 'integer', 'null' => false, 'default' => null, 'unsigned' => false),
-		'observacoes' => array('type' => 'text', 'null' => false, 'default' => null, 'collate' => 'latin1_swedish_ci', 'charset' => 'latin1'),
-		'user_id' => array('type' => 'integer', 'null' => false, 'default' => null, 'unsigned' => false),
+		'cliente_id' => array('type' => 'integer', 'null' => false, 'default' => '0', 'unsigned' => false),
+		'status' => array('type' => 'integer', 'null' => false, 'default' => '1', 'unsigned' => false),
+		'observacoes' => array('type' => 'string', 'null' => true, 'default' => null, 'collate' => 'latin1_swedish_ci', 'charset' => 'latin1'),
+		'usuario_id' => array('type' => 'integer', 'null' => true, 'default' => null, 'unsigned' => false),
 		'indexes' => array(
 			'PRIMARY' => array('column' => 'id', 'unique' => 1)
 		),
