@@ -8,7 +8,7 @@ class PedidosController extends ComercialAppController
 
     private $referer = array('plugin' => 'comercial', 'admin' => false, 'controller' => 'comercial', 'action' => 'index');
 
-    public function novo() 
+    public function novo($pedido_id = null) 
     {
         if ($this->request->is('post')) {
             $this->request->data['Pedido']['usuario_id'] = $this->Auth->user('id');
@@ -22,9 +22,13 @@ class PedidosController extends ComercialAppController
             $this->Flash->error('Não foi possível cadastrar seu pedido, tente novamente.');
         }
 
-        $this->Pedido->create();
-        $id = $this->Pedido->getSaveProximoNumero($this->Auth->user('id'));
-
+        if (!empty($pedido_id)) {
+            $id = $pedido_id;
+        } else {
+            $this->Pedido->create();
+            $id = $this->Pedido->getSaveProximoNumero($this->Auth->user('id'));
+        }
+        
         $clientes = $this->Pedido->Cliente->find('list', array('fields' => array('Cliente.id', 'Cliente.email', 'Cliente.nome')));
 
         $this->set(compact('clientes', 'id'));
@@ -38,6 +42,11 @@ class PedidosController extends ComercialAppController
         }
 
         $pedido = $this->Pedido->findById($pedido_id);
+
+        if (empty($pedido['Pedido']['cliente_id'])) {
+            return $this->redirect(array('action' => 'novo', $pedido['Pedido']['id']));
+        }
+
         $this->loadModel('Produto');
         $produtos = $this->Produto->find('all');
 
