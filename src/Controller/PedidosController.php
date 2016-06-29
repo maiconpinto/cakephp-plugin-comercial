@@ -1,10 +1,14 @@
 <?php
 
-class PedidosController extends ComercialAppController
+namespace PluginComercial\Controller;
+
+use PluginComercial\Controller\AppController;
+
+class PedidosController extends AppController
 {
-    public $components = array('Comercial.Utils');
+    public $components = array('PluginComercial.Utils');
     
-    public $helpers = array('Comercial.Utils');
+    public $helpers = array('PluginComercial.Utils');
 
     private $referer = array('plugin' => 'comercial', 'admin' => false, 'controller' => 'comercial', 'action' => 'index');
 
@@ -50,7 +54,7 @@ class PedidosController extends ComercialAppController
         $this->loadModel('Produto');
         $produtos = $this->Produto->find('all');
 
-        $this->loadModel('Comercial.Item');
+        $this->loadModel('PluginComercial.Item');
         $itens = $this->Item->findByPedidoId($pedido_id);
         $this->set(compact('pedido', 'produtos', 'itens'));
     }
@@ -67,7 +71,7 @@ class PedidosController extends ComercialAppController
             $this->redirect(array('plugin' => 'comercial', 'admin' => false, 'controller' => 'comercial', 'action' => 'index'));
         }
 
-        $this->loadModel('Comercial.Item');
+        $this->loadModel('PluginComercial.Item');
         
         $item = $this->Item->findByPedidoIdAndProdutoId($pedido_id, $produto_id);
 
@@ -101,7 +105,7 @@ class PedidosController extends ComercialAppController
 
         $pedido = $this->Pedido->findById($pedido_id);
 
-        $this->loadModel('Comercial.Item');
+        $this->loadModel('PluginComercial.Item');
         $this->Item->recursive = 2;
         $itens = $this->Item->findByPedidoId($pedido_id);
         $this->set(compact('pedido', 'itens'));
@@ -116,7 +120,7 @@ class PedidosController extends ComercialAppController
 
         $pedido = $this->Pedido->findById($pedido_id);
 
-        $this->loadModel('Comercial.Item');
+        $this->loadModel('PluginComercial.Item');
         $this->Item->recursive = 2;
         $itens = $this->Item->findByPedidoId($pedido_id);
         $cliente = $this->Pedido->Cliente->find('first', array('conditions' => array('Cliente.id' => $pedido['Pedido']['cliente_id'])));
@@ -131,7 +135,7 @@ class PedidosController extends ComercialAppController
 
         $pedido = $this->Pedido->findById($pedido_id);
 
-        $this->loadModel('Comercial.Orcamento');
+        $this->loadModel('PluginComercial.Orcamento');
         $this->Orcamento->create();
 
         if ($this->Orcamento->save($pedido)) {
@@ -153,7 +157,7 @@ class PedidosController extends ComercialAppController
         extract($this->request->data);
 
         if (!empty($item_id)) {
-            $this->loadModel('Comercial.Item');
+            $this->loadModel('PluginComercial.Item');
             $this->Item->id = $item_id;
             $this->Item->saveField('nome', $nome);
             $this->Item->saveField('qtde', $qtde);
@@ -173,7 +177,7 @@ class PedidosController extends ComercialAppController
 
         $pedido = $this->Pedido->findById($pedido_id);
 
-        $this->loadModel('Comercial.Orcamento');
+        $this->loadModel('PluginComercial.Orcamento');
         $this->Orcamento->create();
 
         if ($this->Orcamento->save($pedido)) {
@@ -197,7 +201,7 @@ class PedidosController extends ComercialAppController
 
         $pedido = $this->Pedido->findById($pedido_id);
 
-        $this->loadModel('Comercial.Item');
+        $this->loadModel('PluginComercial.Item');
         $this->Item->recursive = 2;
         $itens = $this->Item->findByPedidoId($pedido_id);
         $cliente = $this->Pedido->Cliente->find('first', array('conditions' => array('Cliente.id' => $pedido['Pedido']['cliente_id'])));
@@ -215,9 +219,9 @@ class PedidosController extends ComercialAppController
             $this->layout = 'print';
         }
 
-        $this->loadModel('Comercial.Item');
-        $this->loadModel('Comercial.Pedido');
-        $this->loadModel('Comercial.Cliente');
+        $this->loadModel('PluginComercial.Item');
+        $this->loadModel('PluginComercial.Pedido');
+        $this->loadModel('PluginComercial.Cliente');
         $this->loadModel('Produto');
 
         $item = $this->Item->findById($item_id);

@@ -1,8 +1,10 @@
 <?php
 
-App::uses('AppController', 'Controller');
+namespace PluginComercial\Controller;
 
-class ComercialAppController extends AppController {
+use App\Controller\AppController as BaseController;
+
+class AppController extends BaseController {
 
     public function isAuthorized($user)
     {
@@ -11,11 +13,6 @@ class ComercialAppController extends AppController {
         }
 
         return false;
-    }
-
-    public function beforeFilter()
-    {
-        $this->theme = 'admin';
     }
 
     public function getReferer()

@@ -1,10 +1,12 @@
 <?php
 
-App::uses('ComercialAppController', 'Comercial.Controller');
+namespace PluginComercial\Controller;
 
-class ComercialController extends ComercialAppController
+use PluginComercial\Controller\AppController;
+
+class ComercialController extends AppController
 {
-    public $uses = array('Comercial.Pedido');
+    public $uses = array('PluginComercial.Pedido');
 
     public function index()
     {
