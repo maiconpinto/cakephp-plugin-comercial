@@ -1,4 +1,7 @@
 <?php
+use Cake\Core\Plugin;
+use Cake\Routing\RouteBuilder;
+use Cake\Routing\Router;
 
 Router::connect('/comercial', array('plugin' => 'comercial', 'admin' => false,  'controller' => 'comercial', 'action' => 'index'));
 
