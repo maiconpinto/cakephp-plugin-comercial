@@ -7,8 +7,13 @@
 			"email": "maiconsilva.pinto@gmail.com"
 		}
 	],
+	"autoload": {
+		"psr-4": {
+			"PluginComercial\\": "src"
+		}
+	},
 	"type": "cakephp-plugin",
-  	"require": {
+	"require": {
 		"composer/installers": "~1.0"
 	}
 }
