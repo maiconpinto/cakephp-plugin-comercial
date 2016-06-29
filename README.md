@@ -1,5 +1,3 @@
 # CakePHP - Plugin Pedidos
 
-## Theme Admin
-
-* Configurado para usar [Theme Admin](https://github.com/maiconpinto/cakephp-sb-theme)
+Use as [Plugin](http://book.cakephp.org/3.0/en/plugins.html) of CakePHP 3.x
