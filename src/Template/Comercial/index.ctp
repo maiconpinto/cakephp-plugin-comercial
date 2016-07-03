@@ -3,7 +3,7 @@
         <div class="col-lg-12">
             <h1 class="page-header">Painel</h1>
         </div>
-        
+
         <div class="col-md-12">
             <div class="panel panel-blue">
                 <div class="panel-heading">
@@ -22,8 +22,8 @@
                         <span class="pull-left">Detalhes</span>
                         <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                         <div class="clearfix"></div>
-                    </div>'; 
-                echo $this->Html->link($link, array('plugin' => 'comercial', 'admin' => false, 'controller' => 'comercial', 'action' => 'pedidos'), array('escape' => false));
+                    </div>';
+                //echo $this->Html->link($link, array('plugin' => 'comercial', 'admin' => false, 'controller' => 'comercial', 'action' => 'pedidos'), array('escape' => false));
                 ?>
             </div>
         </div>
@@ -46,8 +46,8 @@
                         <span class="pull-left">Detalhes</span>
                         <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                         <div class="clearfix"></div>
-                    </div>'; 
-                echo $this->Html->link($link, array('plugin' => 'comercial', 'admin' => false, 'controller' => 'comercial', 'action' => 'andamento'), array('escape' => false));
+                    </div>';
+                //echo $this->Html->link($link, array('plugin' => 'comercial', 'admin' => false, 'controller' => 'comercial', 'action' => 'andamento'), array('escape' => false));
                 ?>
             </div>
         </div>
@@ -70,12 +70,12 @@
                         <span class="pull-left">Detalhes</span>
                         <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                         <div class="clearfix"></div>
-                    </div>'; 
-                echo $this->Html->link($link, array('plugin' => 'comercial', 'admin' => false, 'controller' => 'comercial', 'action' => 'aguardando'), array('escape' => false));
+                    </div>';
+                //echo $this->Html->link($link, array('plugin' => 'comercial', 'admin' => false, 'controller' => 'comercial', 'action' => 'aguardando'), array('escape' => false));
                 ?>
             </div>
         </div>
-      
+
         <div class="col-md-12">
             <div class="panel panel-blue">
                 <div class="panel-heading">
@@ -94,8 +94,8 @@
                         <span class="pull-left">Detalhes</span>
                         <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                         <div class="clearfix"></div>
-                    </div>'; 
-                echo $this->Html->link($link, array('plugin' => 'comercial', 'admin' => false, 'controller' => 'comercial', 'action' => 'confirmados'), array('escape' => false));
+                    </div>';
+                //echo $this->Html->link($link, array('plugin' => 'comercial', 'admin' => false, 'controller' => 'comercial', 'action' => 'confirmados'), array('escape' => false));
                 ?>
             </div>
         </div>
@@ -123,8 +123,8 @@
                         <span class="pull-left">Novo</span>
                         <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                         <div class="clearfix"></div>
-                    </div>'; 
-                echo $this->Html->link($link, array('plugin' => 'comercial', 'admin' => false, 'controller' => 'pedidos', 'action' => 'novo'), array('escape' => false));
+                    </div>';
+                //echo $this->Html->link($link, array('plugin' => 'comercial', 'admin' => false, 'controller' => 'pedidos', 'action' => 'novo'), array('escape' => false));
                 ?>
             </div>
         </div>

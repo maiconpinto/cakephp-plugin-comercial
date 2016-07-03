@@ -3,8 +3,16 @@
 namespace PluginComercial\Controller;
 
 use App\Controller\AppController as BaseController;
+use Cake\Event\Event;
+use Cake\Core\Configure;
 
 class AppController extends BaseController {
+
+    public function beforeRender(Event $event)
+    {
+        $this->viewBuilder()->theme('AdminLTE');
+        $this->set('theme', Configure::read('Theme'));
+    }
 
     public function isAuthorized($user)
     {

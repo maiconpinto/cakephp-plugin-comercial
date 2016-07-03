@@ -3,18 +3,25 @@
 namespace PluginComercial\Controller;
 
 use PluginComercial\Controller\AppController;
+use Cake\ORM\TableRegistry;
+use Cake\Event\Event;
 
 class ComercialController extends AppController
 {
-    public $uses = array('PluginComercial.Pedido');
+    private $Pedido;
+
+    public function beforeFilter(Event $event)
+    {
+        $this->Pedido = TableRegistry::get('Pedidos');
+        parent::beforeFilter($event);
+    }
 
     public function index()
     {
-        $pedidos = $this->Pedido->find('count');
-        $andamento = $this->Pedido->find('count', array('conditions' => array('Pedido.status' => '1')));
-        $aguardando = $this->Pedido->find('count', array('conditions' => array('Pedido.status' => '2')));
-        $confirmados = $this->Pedido->find('count', array('conditions' => array('Pedido.status' => '3')));
-        
+        $pedidos = $this->Pedido->find('all')->count();
+        $andamento = $this->Pedido->find('all')->where(['Pedidos.status' => '1'])->count();
+        $aguardando = $this->Pedido->find('all')->where(['Pedidos.status' => '2'])->count();
+        $confirmados = $this->Pedido->find('all')->where(['Pedidos.status' => '3'])->count();
         $this->set(compact('pedidos', 'andamento', 'aguardando', 'confirmados'));
     }
 
@@ -24,25 +31,25 @@ class ComercialController extends AppController
 
         $this->set(compact('pedidos'));
     }
-    
+
     public function andamento()
     {
         $pedidos = $this->Pedido->find('all', array('conditions' => array('Pedido.status' => '1')));
-        
+
         $this->set(compact('pedidos'));
     }
 
     public function aguardando()
     {
         $pedidos = $this->Pedido->find('all', array('conditions' => array('Pedido.status' => '2')));
-        
+
         $this->set(compact('pedidos'));
     }
-    
+
     public function confirmados()
     {
         $pedidos = $this->Pedido->find('all', array('conditions' => array('Pedido.status' => '3')));
-        
+
         $this->set(compact('pedidos'));
     }
 }
