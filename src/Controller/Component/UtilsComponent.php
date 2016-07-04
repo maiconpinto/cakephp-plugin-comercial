@@ -1,4 +1,7 @@
 <?php
+namespace PluginComercial\Controller\Component;
+
+use Cake\Controller\Component;
 
 class UtilsComponent extends Component
 {
