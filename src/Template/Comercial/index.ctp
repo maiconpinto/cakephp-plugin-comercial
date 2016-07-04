@@ -9,7 +9,7 @@
                 <div class="panel-heading">
                     <div class="row">
                         <div class="col-xs-3">
-                            <i class="fa fa-dropbox fa-5x"></i>
+                            <i class="fa fa-copy fa-5x"></i>
                         </div>
                         <div class="col-xs-9 text-right">
                             <div class="huge"><?= (!empty($pedidos)) ? $pedidos : 0; ?></div>
@@ -111,7 +111,7 @@
                 <div class="panel-heading">
                     <div class="row">
                         <div class="col-xs-3">
-                            <i class="fa fa-dropbox fa-5x"></i>
+                            <i class="fa fa-copy fa-5x"></i>
                         </div>
                         <div class="col-xs-9 text-right">
                             <div class="huge">Pedido</div>
