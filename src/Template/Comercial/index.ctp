@@ -23,7 +23,7 @@
                         <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                         <div class="clearfix"></div>
                     </div>';
-                //echo $this->Html->link($link, array('plugin' => 'comercial', 'admin' => false, 'controller' => 'comercial', 'action' => 'pedidos'), array('escape' => false));
+                echo $this->Html->link($link, ['plugin' => 'PluginComercial', 'admin' => false, 'controller' => 'comercial', 'action' => 'pedidos'], ['escape' => false]);
                 ?>
             </div>
         </div>
@@ -47,7 +47,7 @@
                         <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                         <div class="clearfix"></div>
                     </div>';
-                //echo $this->Html->link($link, array('plugin' => 'comercial', 'admin' => false, 'controller' => 'comercial', 'action' => 'andamento'), array('escape' => false));
+                echo $this->Html->link($link, ['plugin' => 'PluginComercial', 'admin' => false, 'controller' => 'comercial', 'action' => 'andamento'], ['escape' => false]);
                 ?>
             </div>
         </div>
@@ -71,7 +71,7 @@
                         <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                         <div class="clearfix"></div>
                     </div>';
-                //echo $this->Html->link($link, array('plugin' => 'comercial', 'admin' => false, 'controller' => 'comercial', 'action' => 'aguardando'), array('escape' => false));
+                echo $this->Html->link($link, ['plugin' => 'PluginComercial', 'admin' => false, 'controller' => 'comercial', 'action' => 'aguardando'], ['escape' => false]);
                 ?>
             </div>
         </div>
@@ -95,7 +95,7 @@
                         <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                         <div class="clearfix"></div>
                     </div>';
-                //echo $this->Html->link($link, array('plugin' => 'comercial', 'admin' => false, 'controller' => 'comercial', 'action' => 'confirmados'), array('escape' => false));
+                echo $this->Html->link($link, ['plugin' => 'PluginComercial', 'admin' => false, 'controller' => 'comercial', 'action' => 'confirmados'], ['escape' => false]);
                 ?>
             </div>
         </div>
@@ -124,7 +124,7 @@
                         <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                         <div class="clearfix"></div>
                     </div>';
-                //echo $this->Html->link($link, array('plugin' => 'comercial', 'admin' => false, 'controller' => 'pedidos', 'action' => 'novo'), array('escape' => false));
+                echo $this->Html->link($link, ['plugin' => 'PluginComercial', 'admin' => false, 'controller' => 'pedidos', 'action' => 'novo'], ['escape' => false]);
                 ?>
             </div>
         </div>

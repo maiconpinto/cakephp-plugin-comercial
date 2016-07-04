@@ -7,12 +7,12 @@ use PluginComercial\Controller\AppController;
 class PedidosController extends AppController
 {
     public $components = array('PluginComercial.Utils');
-    
+
     public $helpers = array('PluginComercial.Utils');
 
-    private $referer = array('plugin' => 'comercial', 'admin' => false, 'controller' => 'comercial', 'action' => 'index');
+    private $referer = array('plugin' => 'PluginComercial', 'admin' => false, 'controller' => 'comercial', 'action' => 'index');
 
-    public function novo($pedido_id = null) 
+    public function novo($pedido_id = null)
     {
         if ($this->request->is('post')) {
             $this->request->data['Pedido']['usuario_id'] = $this->Auth->user('id');
@@ -22,7 +22,7 @@ class PedidosController extends AppController
                 $this->Flash->success('Informe os produtos deste pedido');
                 return $this->redirect(array('action' => 'produtos', $pedido_id));
             }
-            
+
             $this->Flash->error('Não foi possível cadastrar seu pedido, tente novamente.');
         }
 
@@ -32,7 +32,7 @@ class PedidosController extends AppController
             $this->Pedido->create();
             $id = $this->Pedido->getSaveProximoNumero($this->Auth->user('id'));
         }
-        
+
         $clientes = $this->Pedido->Cliente->find('list', array('fields' => array('Cliente.id', 'Cliente.email', 'Cliente.nome')));
 
         $this->set(compact('clientes', 'id'));
@@ -63,16 +63,16 @@ class PedidosController extends AppController
     {
         if (empty($produto_id)) {
             $this->Flash->error('Produto não informado.');
-            $this->redirect(array('plugin' => 'comercial', 'admin' => false, 'controller' => 'comercial', 'action' => 'index'));
+            $this->redirect(array('plugin' => 'PluginComercial', 'admin' => false, 'controller' => 'comercial', 'action' => 'index'));
         }
 
         if (empty($pedido_id)) {
             $this->Flash->error('Pedido não informado.');
-            $this->redirect(array('plugin' => 'comercial', 'admin' => false, 'controller' => 'comercial', 'action' => 'index'));
+            $this->redirect(array('plugin' => 'PluginComercial', 'admin' => false, 'controller' => 'comercial', 'action' => 'index'));
         }
 
         $this->loadModel('PluginComercial.Item');
-        
+
         $item = $this->Item->findByPedidoIdAndProdutoId($pedido_id, $produto_id);
 
         if (!empty($item)) {
@@ -92,7 +92,7 @@ class PedidosController extends AppController
         if ($this->Item->save($item)) {
             $this->Flash->success('Continue adicionando produtos ao Pedido.');
         }
-        
+
         return $this->redirect($this->getReferer());
     }
 
@@ -100,7 +100,7 @@ class PedidosController extends AppController
     {
         if (empty($pedido_id)) {
             $this->Flash->error('Pedido não informado.');
-            return $this->redirect(array('plugin' => 'comercial', 'admin' => false, 'controller' => 'comercial', 'action' => 'index'));
+            return $this->redirect(array('plugin' => 'PluginComercial', 'admin' => false, 'controller' => 'comercial', 'action' => 'index'));
         }
 
         $pedido = $this->Pedido->findById($pedido_id);
@@ -115,7 +115,7 @@ class PedidosController extends AppController
     {
         if (empty($pedido_id)) {
             $this->Flash->error('Pedido não informado.');
-            return $this->redirect(array('plugin' => 'comercial', 'admin' => false, 'controller' => 'comercial', 'action' => 'index'));
+            return $this->redirect(array('plugin' => 'PluginComercial', 'admin' => false, 'controller' => 'comercial', 'action' => 'index'));
         }
 
         $pedido = $this->Pedido->findById($pedido_id);
@@ -146,7 +146,7 @@ class PedidosController extends AppController
 
         $this->Pedido->statusAguardando($pedido_id);
 
-        return $this->redirect(array('plugin' => 'comercial', 'admin' => false, 'controller' => 'comercial', 'action' => 'index'));
+        return $this->redirect(array('plugin' => 'PluginComercial', 'admin' => false, 'controller' => 'comercial', 'action' => 'index'));
 
     }
 
@@ -188,7 +188,7 @@ class PedidosController extends AppController
 
         $this->Pedido->statusConfirmado($pedido_id, false);
 
-        return $this->redirect(array('plugin' => 'comercial', 'admin' => false, 'controller' => 'comercial', 'action' => 'index'));
+        return $this->redirect(array('plugin' => 'PluginComercial', 'admin' => false, 'controller' => 'comercial', 'action' => 'index'));
 
     }
 
@@ -196,7 +196,7 @@ class PedidosController extends AppController
     {
         if (empty($pedido_id)) {
             $this->Flash->error('Pedido não informado.');
-            return $this->redirect(array('plugin' => 'comercial', 'admin' => false, 'controller' => 'comercial', 'action' => 'index'));
+            return $this->redirect(array('plugin' => 'PluginComercial', 'admin' => false, 'controller' => 'comercial', 'action' => 'index'));
         }
 
         $pedido = $this->Pedido->findById($pedido_id);
@@ -212,7 +212,7 @@ class PedidosController extends AppController
     {
         if (empty($item_id)) {
             $this->Flash->error('Item para impressão não encontrado.');
-            return $this->redirect(array('plugin' => 'comercial', 'admin' => false, 'controller' => 'comercial', 'action' => 'confirmados'));
+            return $this->redirect(array('plugin' => 'PluginComercial', 'admin' => false, 'controller' => 'comercial', 'action' => 'confirmados'));
         }
 
         if (!empty($ajax)) {
@@ -227,7 +227,7 @@ class PedidosController extends AppController
         $item = $this->Item->findById($item_id);
 
         $pedido = $this->Pedido->findById($item['Item']['pedido_id']);
-        
+
         $produto = $this->Produto->findById($item['Item']['produto_id']);
 
         $cliente = $this->Cliente->findById($pedido['Pedido']['cliente_id']);
