@@ -1,6 +1,6 @@
-<?= $this->element("/scripts/datatables"); ?>
-
 <?php
+use Cake\Core\Configure;
+
 $lista_status_pedido = Configure::read('Pedidos.status');
 ?>
 <div class="row">
@@ -29,11 +29,12 @@ $lista_status_pedido = Configure::read('Pedidos.status');
                             </tr>
                         </thead>
                         <tbody>
-                        <?php foreach ($pedidos as $p): ?>
+                        <?php
+                        foreach ($pedidos as $pedido): ?>
                         <tr>
-                            <td><?php echo h($p['Pedido']['id']); ?>&nbsp;</td>
-                            <td><?php echo h($p['Pedido']['numero']); ?>&nbsp;</td>
-                            <td><?php echo $lista_status_pedido[$p['Pedido']['status']]; ?>&nbsp;</td>
+                            <td><?php echo h($pedido->id); ?>&nbsp;</td>
+                            <td><?php echo h($pedido->numero); ?>&nbsp;</td>
+                            <td><?php echo $lista_status_pedido[$pedido->status]; ?>&nbsp;</td>
                         </tr>
                         <?php endforeach; ?>
                         </tbody>
@@ -41,5 +42,5 @@ $lista_status_pedido = Configure::read('Pedidos.status');
                 </div>
             </div>
         </div>
-    </div> 
+    </div>
 </div>
