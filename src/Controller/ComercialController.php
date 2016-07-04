@@ -27,7 +27,7 @@ class ComercialController extends AppController
 
     public function pedidos()
     {
-        $pedidos = $this->Pedido->find('all');
+        $pedidos = $this->Pedido->find('all')->all();
 
         $this->set(compact('pedidos'));
     }
