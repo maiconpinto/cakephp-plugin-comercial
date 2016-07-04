@@ -6,9 +6,11 @@ use PluginComercial\Controller\AppController;
 
 class PedidosController extends AppController
 {
-    public $components = array('PluginComercial.Utils');
-
-    public $helpers = array('PluginComercial.Utils');
+    public function initialize()
+    {
+        $this->loadModel('PluginComercial.Pedidos');
+        $this->loadComponent('PluginComercial.Utils');
+    }
 
     private $referer = array('plugin' => 'PluginComercial', 'admin' => false, 'controller' => 'comercial', 'action' => 'index');
 
@@ -17,8 +19,8 @@ class PedidosController extends AppController
         if ($this->request->is('post')) {
             $this->request->data['Pedido']['usuario_id'] = $this->Auth->user('id');
 
-            if ($this->Pedido->saveAll($this->request->data)) {
-                $pedido_id = $this->Pedido->id;
+            if ($this->Pedidos->saveAll($this->request->data)) {
+                $pedido_id = $this->Pedidos->id;
                 $this->Flash->success('Informe os produtos deste pedido');
                 return $this->redirect(array('action' => 'produtos', $pedido_id));
             }
@@ -29,11 +31,11 @@ class PedidosController extends AppController
         if (!empty($pedido_id)) {
             $id = $pedido_id;
         } else {
-            $this->Pedido->create();
-            $id = $this->Pedido->getSaveProximoNumero($this->Auth->user('id'));
+            // $this->Pedidos->create();
+            $id = $this->Pedidos->getSaveProximoNumero($this->Auth->user('id'));
         }
 
-        $clientes = $this->Pedido->Cliente->find('list', array('fields' => array('Cliente.id', 'Cliente.email', 'Cliente.nome')));
+        $clientes = $this->Pedidos->Cliente->find('list', array('fields' => array('Cliente.id', 'Cliente.email', 'Cliente.nome')));
 
         $this->set(compact('clientes', 'id'));
     }
@@ -45,7 +47,7 @@ class PedidosController extends AppController
             return $this->redirect(array('action' => 'novo'));
         }
 
-        $pedido = $this->Pedido->findById($pedido_id);
+        $pedido = $this->Pedidos->findById($pedido_id);
 
         if (empty($pedido['Pedido']['cliente_id'])) {
             return $this->redirect(array('action' => 'novo', $pedido['Pedido']['id']));
@@ -103,7 +105,7 @@ class PedidosController extends AppController
             return $this->redirect(array('plugin' => 'PluginComercial', 'admin' => false, 'controller' => 'comercial', 'action' => 'index'));
         }
 
-        $pedido = $this->Pedido->findById($pedido_id);
+        $pedido = $this->Pedidos->findById($pedido_id);
 
         $this->loadModel('PluginComercial.Item');
         $this->Item->recursive = 2;
@@ -118,12 +120,12 @@ class PedidosController extends AppController
             return $this->redirect(array('plugin' => 'PluginComercial', 'admin' => false, 'controller' => 'comercial', 'action' => 'index'));
         }
 
-        $pedido = $this->Pedido->findById($pedido_id);
+        $pedido = $this->Pedidos->findById($pedido_id);
 
         $this->loadModel('PluginComercial.Item');
         $this->Item->recursive = 2;
         $itens = $this->Item->findByPedidoId($pedido_id);
-        $cliente = $this->Pedido->Cliente->find('first', array('conditions' => array('Cliente.id' => $pedido['Pedido']['cliente_id'])));
+        $cliente = $this->Pedidos->Cliente->find('first', array('conditions' => array('Cliente.id' => $pedido['Pedido']['cliente_id'])));
         $this->set(compact('pedido', 'itens', 'cliente'));
     }
 
@@ -133,7 +135,7 @@ class PedidosController extends AppController
             $this->Flash->error('Pedido não informado.');
         }
 
-        $pedido = $this->Pedido->findById($pedido_id);
+        $pedido = $this->Pedidos->findById($pedido_id);
 
         $this->loadModel('PluginComercial.Orcamento');
         $this->Orcamento->create();
@@ -144,7 +146,7 @@ class PedidosController extends AppController
             $this->Flash->error('Houve um problema com o Orçamento.');
         }
 
-        $this->Pedido->statusAguardando($pedido_id);
+        $this->Pedidos->statusAguardando($pedido_id);
 
         return $this->redirect(array('plugin' => 'PluginComercial', 'admin' => false, 'controller' => 'comercial', 'action' => 'index'));
 
@@ -175,7 +177,7 @@ class PedidosController extends AppController
             $this->Flash->error('Pedido não informado.');
         }
 
-        $pedido = $this->Pedido->findById($pedido_id);
+        $pedido = $this->Pedidos->findById($pedido_id);
 
         $this->loadModel('PluginComercial.Orcamento');
         $this->Orcamento->create();
@@ -186,7 +188,7 @@ class PedidosController extends AppController
             $this->Flash->error('Houve um problema com o Orçamento.');
         }
 
-        $this->Pedido->statusConfirmado($pedido_id, false);
+        $this->Pedidos->statusConfirmado($pedido_id, false);
 
         return $this->redirect(array('plugin' => 'PluginComercial', 'admin' => false, 'controller' => 'comercial', 'action' => 'index'));
 
@@ -199,12 +201,12 @@ class PedidosController extends AppController
             return $this->redirect(array('plugin' => 'PluginComercial', 'admin' => false, 'controller' => 'comercial', 'action' => 'index'));
         }
 
-        $pedido = $this->Pedido->findById($pedido_id);
+        $pedido = $this->Pedidos->findById($pedido_id);
 
         $this->loadModel('PluginComercial.Item');
         $this->Item->recursive = 2;
         $itens = $this->Item->findByPedidoId($pedido_id);
-        $cliente = $this->Pedido->Cliente->find('first', array('conditions' => array('Cliente.id' => $pedido['Pedido']['cliente_id'])));
+        $cliente = $this->Pedidos->Cliente->find('first', array('conditions' => array('Cliente.id' => $pedido['Pedido']['cliente_id'])));
         $this->set(compact('pedido', 'itens', 'cliente'));
     }
 
@@ -226,7 +228,7 @@ class PedidosController extends AppController
 
         $item = $this->Item->findById($item_id);
 
-        $pedido = $this->Pedido->findById($item['Item']['pedido_id']);
+        $pedido = $this->Pedidos->findById($item['Item']['pedido_id']);
 
         $produto = $this->Produto->findById($item['Item']['produto_id']);
 
