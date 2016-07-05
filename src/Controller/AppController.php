@@ -14,13 +14,9 @@ class AppController extends BaseController {
         $this->set('theme', Configure::read('Theme'));
     }
 
-    public function isAuthorized($user)
+    public function isAuthorized($user = null)
     {
-        if ($this->Auth->login()) {
-            return true;
-        }
-
-        return false;
+        return true;
     }
 
     public function getReferer()
