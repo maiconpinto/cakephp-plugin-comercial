@@ -19,7 +19,7 @@ class PedidosTable extends Table
     }
 
     public function beforeMarshal(Event $event, ArrayObject $data, ArrayObject $options) {
-        if (!empty($data['Pedido']['cliente_id'])) {
+        if (!empty($data['Pedidos']['cliente_id'])) {
             unset($data['Cliente']);
         }
     }
@@ -65,8 +65,8 @@ class PedidosTable extends Table
 
     public function getProximoNumero()
     {
-        $pedido = $this->find('first', array('order' => array('Pedido.id' => 'DESC')));
-        return isset($pedido['Pedido']['id']) ? $pedido['Pedido']['id'] + 1 : 1;
+        $pedido = $this->find('first', array('order' => array('Pedidos.id' => 'DESC')));
+        return isset($pedido['Pedidos']['id']) ? $pedido['Pedidos']['id'] + 1 : 1;
     }
 
     public function getSaveProximoNumero($id_usuario = null)

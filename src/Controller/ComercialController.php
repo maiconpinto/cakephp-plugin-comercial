@@ -34,21 +34,21 @@ class ComercialController extends AppController
 
     public function andamento()
     {
-        $pedidos = $this->Pedido->find('all', array('conditions' => array('Pedido.status' => '1')));
+        $pedidos = $this->Pedido->find('all')->where(['Pedidos.status' => '1']);
 
         $this->set(compact('pedidos'));
     }
 
     public function aguardando()
     {
-        $pedidos = $this->Pedido->find('all', array('conditions' => array('Pedido.status' => '2')));
+        $pedidos = $this->Pedido->find('all')->where(['Pedidos.status' => '2']);
 
         $this->set(compact('pedidos'));
     }
 
     public function confirmados()
     {
-        $pedidos = $this->Pedido->find('all', array('conditions' => array('Pedido.status' => '3')));
+        $pedidos = $this->Pedido->find('all')->where(['Pedidos.status' => '3']);
 
         $this->set(compact('pedidos'));
     }
