@@ -9,6 +9,8 @@ class ClientesTable extends Table
     {
         $this->displayField('nome');
 
+        $this->addBehavior('Timestamp');
+
         $this->hasMany('Pedidos', [
             'className' => 'PluginComercial.Pedidos',
             'foreignKey' => 'pedido_id'

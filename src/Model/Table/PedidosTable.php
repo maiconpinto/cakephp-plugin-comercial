@@ -2,6 +2,8 @@
 namespace PluginComercial\Model\Table;
 
 use Cake\ORM\Table;
+use Cake\Model\Table\ArrayObject;
+use Cake\Event\Event;
 
 class PedidosTable extends Table
 {
