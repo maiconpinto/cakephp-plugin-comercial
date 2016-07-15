@@ -20,7 +20,7 @@ class PedidosTable extends Table
         ]);
     }
 
-    public function beforeMarshal(Event $event, ArrayObject $data, ArrayObject $options) {
+    public function beforeMarshal(Event $event, \ArrayObject $data, \ArrayObject $options) {
         if (!empty($data['Pedidos']['cliente_id'])) {
             unset($data['Cliente']);
         }
@@ -29,7 +29,7 @@ class PedidosTable extends Table
     public function afterSave($created, $options = array())
     {
         if ($created) {
-            $this->saveField('status', '1');
+            $this->status = 1;
         }
     }
 
@@ -43,7 +43,7 @@ class PedidosTable extends Table
 
         $change = ($sequence) ? ($this->field('status') == 1) : true;
         if ($change) {
-            $this->saveField('status', 2);
+            $this->status = 2;
         }
 
         return true;
@@ -59,7 +59,7 @@ class PedidosTable extends Table
 
         $change = ($sequence) ? ($this->field('status') == 2) : true;
         if ($change) {
-            $this->saveField('status', 3);
+            $this->status = 3;
         }
 
         return true;
@@ -67,7 +67,7 @@ class PedidosTable extends Table
 
     public function getProximoNumero()
     {
-        $pedido = $this->find('first', array('order' => array('Pedidos.id' => 'DESC')));
+        $pedido = $this->find('all', array('order' => array('Pedidos.id' => 'DESC')))->first();
         return isset($pedido['Pedidos']['id']) ? $pedido['Pedidos']['id'] + 1 : 1;
     }
 
@@ -75,10 +75,10 @@ class PedidosTable extends Table
     {
         $id = $this->getProximoNumero();
         $this->id = $id;
-        $this->saveField('numero', $id);
+        $this->numero = $id;
 
         if (!empty($id_usuario)) {
-            $this->saveField('usuario_id', $id_usuario);
+            $this->usuario_id = $id_usuario;
         }
 
         return $id;
