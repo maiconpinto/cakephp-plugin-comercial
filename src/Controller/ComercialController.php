@@ -2,53 +2,67 @@
 
 namespace PluginComercial\Controller;
 
-use PluginComercial\Controller\AppController;
-use Cake\ORM\TableRegistry;
 use Cake\Event\Event;
+use Cake\ORM\TableRegistry;
+use PluginComercial\Controller\AppController;
 
 class ComercialController extends AppController
 {
-    private $Pedido;
+    public function initialize()
+    {
+        parent::initialize();
+        $this->loadComponent('Paginator');
+    }
 
     public function beforeFilter(Event $event)
     {
-        $this->Pedido = TableRegistry::get('Pedidos');
+        // $this->Pedidos = TableRegistry::get('Pedidos');
         parent::beforeFilter($event);
     }
 
     public function index()
     {
-        $pedidos = $this->Pedido->find('all')->count();
-        $andamento = $this->Pedido->find('all')->where(['Pedidos.status' => '1'])->count();
-        $aguardando = $this->Pedido->find('all')->where(['Pedidos.status' => '2'])->count();
-        $confirmados = $this->Pedido->find('all')->where(['Pedidos.status' => '3'])->count();
+        $pedidos     = $this->Pedidos->find('all')->count();
+        $andamento   = $this->Pedidos->find('all')->where(['Pedidos.status' => '1'])->count();
+        $aguardando  = $this->Pedidos->find('all')->where(['Pedidos.status' => '2'])->count();
+        $confirmados = $this->Pedidos->find('all')->where(['Pedidos.status' => '3'])->count();
         $this->set(compact('pedidos', 'andamento', 'aguardando', 'confirmados'));
     }
 
     public function pedidos()
     {
-        $pedidos = $this->Pedido->find('all')->all();
+        $this->loadModel('PluginComercial.Pedidos');
+        $query = $this->Pedidos;
+
+        $search = !empty($this->request->data['search']) ? $this->request->data['search'].'%' : false;
+
+        if ($search) {
+            $query = $this->Pedidos->find('all')
+                ->where(['Pedidos.numero LIKE' => $search]);
+        }
+
+        $pedidos = $this->paginate($query);
 
         $this->set(compact('pedidos'));
     }
 
     public function andamento()
     {
-        $pedidos = $this->Pedido->find('all')->where(['Pedidos.status' => '1']);
+        $pedidos = $this->Pedidos->find('all')->where(['Pedidos.status' => '1']);
 
         $this->set(compact('pedidos'));
     }
 
     public function aguardando()
     {
-        $pedidos = $this->Pedido->find('all')->where(['Pedidos.status' => '2']);
+        $pedidos = $this->Pedidos->find('all')->where(['Pedidos.status' => '2']);
 
         $this->set(compact('pedidos'));
     }
 
     public function confirmados()
     {
-        $pedidos = $this->Pedido->find('all')->where(['Pedidos.status' => '3']);
+        $pedidos = $this->Pedidos->find('all')->where(['Pedidos.status' => '3']);
 
         $this->set(compact('pedidos'));
     }
