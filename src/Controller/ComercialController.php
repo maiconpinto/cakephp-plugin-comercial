@@ -34,11 +34,22 @@ class ComercialController extends AppController
         $this->loadModel('PluginComercial.Pedidos');
         $query = $this->Pedidos;
 
-        $search = !empty($this->request->data['search']) ? $this->request->data['search'].'%' : false;
+        $numero = !empty($this->request->data['numero']) ? $this->request->data['numero'] : false;
+        $status = !empty($this->request->data['status']) ? $this->request->data['status'] : false;
 
-        if ($search) {
+        if ($numero && $status) {
             $query = $this->Pedidos->find('all')
-                ->where(['Pedidos.numero LIKE' => $search]);
+                ->where(['Pedidos.numero' => $numero, 'Pedidos.status' => $status]);
+        }
+
+        if ($numero) {
+            $query = $this->Pedidos->find('all')
+                ->where(['Pedidos.numero' => $numero]);
+        }
+
+        if ($status) {
+            $query = $this->Pedidos->find('all')
+                ->where(['Pedidos.status' => $status]);
         }
 
         $pedidos = $this->paginate($query);
