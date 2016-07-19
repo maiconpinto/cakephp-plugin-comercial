@@ -16,8 +16,12 @@ class PedidosController extends AppController
 
     public function novo($pedido_id = null)
     {
+        $session = $this->request->session();
+
+        $pedido = $this->Pedidos->newEntity();
+
         if ($this->request->is('post')) {
-            $this->request->data['Pedido']['usuario_id'] = $this->Auth->user('id');
+            $this->request->data['Pedido']['usuario_id'] = $session->read('Auth.User.id');
 
             if ($this->Pedidos->saveAll($this->request->data)) {
                 $pedido_id = $this->Pedidos->id;
@@ -31,13 +35,12 @@ class PedidosController extends AppController
         if (!empty($pedido_id)) {
             $id = $pedido_id;
         } else {
-            // $this->Pedidos->create();
-            $id = $this->Pedidos->getSaveProximoNumero($this->Auth->user('id'));
+            $id = $this->Pedidos->getSaveProximoNumero($session->read('Auth.User.id'));
         }
 
-        $clientes = $this->Pedidos->Cliente->find('list', array('fields' => array('Cliente.id', 'Cliente.email', 'Cliente.nome')));
+        $clientes = $this->Pedidos->Clientes->find('list', array('fields' => array('Clientes.id', 'Clientes.email', 'Clientes.nome')));
 
-        $this->set(compact('clientes', 'id'));
+        $this->set(compact('clientes', 'id', 'pedido'));
     }
 
     public function produtos($pedido_id = null)

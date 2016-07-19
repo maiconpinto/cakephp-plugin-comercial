@@ -1,84 +1,53 @@
-<?php
-$this->Html->css('/lib/summernote/summernote', array('inline' => false));
-$this->Html->script('/lib/summernote/summernote', array('inline' => false));
-$this->Html->script('incs/editor', array('inline' => false));
-?>
+<section class="content-header">
+    <h1>
+        Pedido
+        <small><?=__('Add')?></small>
+    </h1>
+    <ol class="breadcrumb">
+        <li>
+            <?php echo $this->Html->link('<i class="fa fa-dashboard"></i> ' . __('Back'), ['plugin' => 'PluginComercial', 'admin' => false, 'controller' => 'Comercial', 'action' => 'pedidos'], ['escape' => false]) ?>
+        </li>
+    </ol>
+</section>
 
-<div class="categorias form">
-
+<!-- Main content -->
+<section class="content">
     <div class="row">
+        <!-- left column -->
         <div class="col-md-12">
-            <div class="page-header">
-                <h1>
-                    <i class="fa fa-dashboard fa-fw"> </i>
-                    Pedido
-                    <?php echo $this->Html->link('Voltar', array('plugin' => 'comercial', 'admin' => false, 'controller' => 'comercial', 'action' => 'index'), array('escape' => false, 'icon' => 'arrow-left', 'class' => 'btn btn-primary pull-right')); ?>               
-                </h1>
+            <!-- general form elements -->
+            <?php echo $this->Form->create($pedido, array('role' => 'form')) ?>
+
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Pedido</h3>
+                </div>
+                <!-- /.box-header -->
+                <!-- form start -->
+                <?php echo $this->Form->input('id', array('value' => $id)); ?>
+
+                <div class="box-body">
+                    <?php
+                    echo $this->Form->input('numero', array('label' => 'Identificação *', 'placeholder' => 'Número do pedido', 'value' => $id, 'disabled' => true));
+                    ?>
+                </div>
+                <!-- /.box-body -->
             </div>
+
+            <div class="box-footer">
+                <?=$this->Form->button(__('Save'))?>
+            </div>
+
+            <?=$this->Form->end()?>
+
         </div>
     </div>
+</section>
 
-    <div class="row">
-
-            <div class="col-md-12">
-                
-                <?php echo $this->Form->create('Pedido', array('role' => 'form')); ?>
-                <?php  echo $this->Form->input('id', array('value' => $id)); ?>
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            Pedido
-                        </div>
-                        <div class="panel-body">
-                            <div class="row">
-                                <div class="col-md-12">
-
-                                    <?php  echo $this->Form->input('numero', array('label' => 'Identificação *', 'placeholder' => 'Número do pedido', 'value' => $id, 'disabled' => true)); ?>
-
-                                </div> <!-- col-md-12 -->
-                            </div> <!-- row -->
-                        </div> <!-- panel-body -->
-                        <div class="panel-footer">
-                            * <small>Campos obrigatórios</small>
-                        </div>
-                    </div> <!-- panel -->
-
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            Cliente
-                        </div>
-                        <div class="panel-body">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    
-                                    <?php  echo $this->Form->input('cliente_id', array('label' => 'Cliente', 'empty' => 'Selecione um cliente - ou - Entre com os dados abaixo')); ?>
-    
-                                    <div class="create-cliente">
-                                        <?php
-                                        echo $this->Form->input('Cliente.nome', array('label' => 'Nome *', 'placeholder' => 'Nome do Cliente'));
-                                        echo $this->Form->input('Cliente.email', array('label' => 'E-mail *', 'placeholder' => 'E-mail do Cliente'));
-                                        echo $this->Form->input('Cliente.telefone', array('label' => 'Telefone', 'placeholder' => 'Telefone do Cliente'));
-                                        ?>
-                                    </div>
-                                </div> <!-- col-md-12 -->
-                            </div> <!-- row -->
-                        </div> <!-- panel-body -->
-                        <div class="panel-footer">
-                            * <small>Campos obrigatórios</small>
-                        </div>
-                    </div> <!-- panel -->
-                
-                    <?php echo $this->Form->submit('Criar pedido', array('class' => 'btn btn-success')); ?>
-
-                <?php echo $this->Form->end() ?>
-
-            </div><!-- end col md 12 -->
-    </div><!-- end row -->
-</div>
-
-<?php $this->start('script'); ?>
+<?php $this->start('script');?>
 <script type="text/javascript">
     $(document).ready(function(){
-        
+
         var form = $('#PedidoNovoForm');
 
         $('input[type="submit"]').click(function(e){
@@ -96,14 +65,14 @@ $this->Html->script('incs/editor', array('inline' => false));
                     if (confirm('Selecione o Cliente, ou entre com os dados.')) {
                         $('#ClienteNome').focus();
                         return false;
-                    }       
+                    }
                 }
 
                 if ($('#ClienteEmail').val() == '') {
                     if (confirm('Informe o e-mail do Cliente.')) {
                         $('#ClienteEmail').focus();
                         return false;
-                    }       
+                    }
                 }
             }
 
@@ -122,4 +91,4 @@ $this->Html->script('incs/editor', array('inline' => false));
         });
     });
 </script>
-<?php $this->end(); ?>
+<?php $this->end();?>
